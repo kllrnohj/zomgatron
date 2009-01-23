@@ -1,0 +1,14 @@
+Home
+This is where you grew up, and Jon is evil.
+StartPos:{-5.0,0.0,-10.0};{0.0,0.0,1.0}
+#plane declared:{position};{direction};{sizexz};{cuts,slices};{colorrgba}
+Plane:{-250.0,-1.0,-250.0};{0.0,0.0,1.0};{500.0,500.0};{100,100};{20,200,20,255}
+#character declared:{name};{position};{direction}
+Character:{test};{2.0,10.0,5.0};{0.0,0.0,1.0}
+Character:{JohnDogget};{0.0,0.0,10.0};{1.0,0.0,1.0}
+#light declared:{type};{diffusergba};{specularrgba};{range,a0,a1,a2};{pos/dir};{dir(when pos is declared for spotlight)}
+Light:{point};{0.3,0.3,0.3,1.0};{0.8,0.8,0.8,1.0};{300.0,0.0005,0.00035,0.00095};{0.0,5.0,10.0}
+Anchor:{doorway1};{3.0,10.0,15.0};{0.0,0.0,1.0}
+TransportationObject:{hometestdoor};{3.0,-1.0,15.0};{0.0,0.0,1.0}
+Anchor:{doorway2};{15.0,0.0,15.0};{0.0,0.0,1.0}
+TransportationObject:{hometestdoor2};{15.0,10.0,15.0};{0.0,0.0,1.0}

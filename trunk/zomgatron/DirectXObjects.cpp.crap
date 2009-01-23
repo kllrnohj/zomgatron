@@ -1,0 +1,10 @@
+#include "DirectXObjects.h"
+
+DirectX* DirectXObjects::DIRECTX;
+LPDIRECT3DDEVICE9 DirectXObjects::D3DDEV;
+LPDIRECT3D9 DirectXObjects::D3D;
+LPD3DXFONT DirectXObjects::FONT;
+LPDIRECTINPUT8 DirectXObjects::DIN;
+LPDIRECTINPUTDEVICE8 DirectXObjects::MOUSE;
+LPDIRECTINPUTDEVICE8 DirectXObjects::KEYB;
+LPD3DXSPRITE DirectXObjects::D3DSPR;

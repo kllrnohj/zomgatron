@@ -1,0 +1,20 @@
+Airplane 2
+Test
+passion:2.0
+strength:2.0
+endurance:3.0
+intelligence:1.0
+alacrity:2.0
+speed:0.8
+armor:0.0
+attack range:15.0
+vertical attack reach:15.0
+horizontal attack reach:15.0
+#if you want multiple conversations just make additional declarations like this:
+#conversation:hi
+#conversation:help
+#... etc
+conversation:hello
+#item:bronze_sword
+#spell:firebolt
+#gold:15
