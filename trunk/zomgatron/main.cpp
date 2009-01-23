@@ -1,6 +1,9 @@
-#include "OpenGL.h"
 #include <windows.h>
+#include <string>
+#include "StringUtils.h"
 #include "INFOSANDTHINGIES.h"
+
+using namespace std;
 
 HWND window;
 float aspectRatio;
@@ -51,7 +54,29 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	MSG msg;
 
-	/*Engine* engine = */new OpenGL(window, hInstance, width, height);
+	// FIND OUT WHAT RENDERER TO USE
+	string str = GetCommandLine();
+
+	int num;
+	string* splits = StringUtils::SplitString(str, ' ', &num);
+	bool foundOne = false;
+	
+	for(int x = 0; x < num; x++){
+		if(StringUtils::CaselessCompare(splits[x], "-directx")){
+			new DirectX(window, hInstance, width, height);
+			foundOne = true;
+			break;
+		}
+		if(StringUtils::CaselessCompare(splits[x], "-opengl")){
+			new OpenGL(window, hInstance, width, height);
+			foundOne = true;
+			break;
+		}
+	}
+	// END DISCOVERING RENDERER
+
+	if(!foundOne)
+		new GRTYPE(window, hInstance, width, height);
 
 	DWORD milli = GetTickCount();
 	while(true){
