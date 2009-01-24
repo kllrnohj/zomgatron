@@ -43,7 +43,7 @@ namespace IronMan
 
         void AgentsEventHandler_OnPhoneCall(object sender, PhoneCallEventArguments e)
         {
-            if (lbCalls.Items.Contains(e.PhoneCallEvent))
+            if (!lbCalls.Items.Contains(e.PhoneCallEvent))
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
         }

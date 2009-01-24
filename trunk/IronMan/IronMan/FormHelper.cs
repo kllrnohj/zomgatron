@@ -17,17 +17,12 @@ namespace IronMan
         {
             if (agent != null)
             {
-                //reset the listbox and then update the info
                 lbSkills.Items.Clear();
-                if (agent.Skills != null)
-                    foreach (Skill s in agent.Skills)
-                        lbSkills.Items.Add(s);
 
-                dgvAvailableSkills.DataSource = agent.Skills;
-                // dgvAvailableSkills.
+                dgvAgentSkills.DataSource = agent.Skills;
+              
                 lblAgentIDValue.Text = agent.AgentID.ToString();
-                //lblAgentStatusValue = agent.AgentStatusType;
-
+                lblAgentStatusValue.Text = agent.AgentStatusType.ToString() ;
             }
         }
         /// <summary>
@@ -36,7 +31,7 @@ namespace IronMan
         /// <param name="call"></param>
         private void BindCall(PhoneCallEvent call)
         {
-
+            
         }
 
     }
