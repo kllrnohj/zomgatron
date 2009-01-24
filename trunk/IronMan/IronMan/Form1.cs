@@ -38,10 +38,24 @@ namespace IronMan
         {
             CallCenter = new AgentsAPI.CallCenter();
             AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
-            //AgentsEventHandler.On
+            AgentsEventHandler.OnAgentStatusChanged += new EventHandler<AgentStatusChangedEventArguments>(AgentsEventHandler_OnAgentStatusChanged);
+            AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
+        }
+
+        void AgentsEventHandler_OnPhoneCall(object sender, PhoneCallEventArguments e)
+        {
+            if (lbCalls.Items.Contains(e.PhoneCallEvent))
+                lbCalls.Items.Add(e.PhoneCallEvent);
+        }
+
+        void AgentsEventHandler_OnAgentStatusChanged(object sender, AgentStatusChangedEventArguments e)
+        {
+            if (!lbAgents.Items.Contains(e.Agent))
+                lbAgents.Items.Add(e.Agent);
+
         }
 
 
-        
+
     }
 }
