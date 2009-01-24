@@ -46,6 +46,7 @@ namespace IronMan
 
             if (bestCallsAgent != null)
             {
+                Log.LogString(String.Format("Transferring AgentID:{0} to CallID:{1}", bestCallsAgent.AgentID, calls[bestCallIndex].PhoneCallID));
                 PhoneCallEvent pce = calls[bestCallIndex];
                 calls.RemoveAt(bestCallIndex);
                 availableAgents.Remove(bestCallsAgent);
@@ -76,11 +77,17 @@ namespace IronMan
 
             foreach (SkillType s in calls[callIndex].SkillsNeeded)
             {
+                bool found = false;
                 for (int x = 0; x < availableAgents[agentIndex].Skills.Count; x++)
                 {
-                    if(availableAgents[agentIndex].Skills[x].SkillType == s)
+                    if (availableAgents[agentIndex].Skills[x].SkillType == s)
+                    {
                         awesomeness *= HEnumToHInt(availableAgents[agentIndex].Skills[x].ProficiencyLevel);
+                        found = true;
+                    }
                 }
+                if (!found)
+                    return -1;
             }
 
             return awesomeness;
@@ -93,7 +100,7 @@ namespace IronMan
             for(int x = 0; x < availableAgents.Count; x++)
             {
                 int val = HRateAgent(callIndex, x); 
-                if (val > highest || best == null)
+                if ((val > highest || best == null) && val != -1)
                 {
                     best = availableAgents[x];
                     highest = val;
