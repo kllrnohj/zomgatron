@@ -10,10 +10,10 @@ namespace IronMan
     partial class NUIronManForm : Form
     {
 
-        public void BindAgent(Agent agent)
+        private void BindAgent(Agent agent)
         {
         }
-        public void BindCall(PhoneCallEvent call)
+        private void BindCall(PhoneCallEvent call)
         {
 
         }

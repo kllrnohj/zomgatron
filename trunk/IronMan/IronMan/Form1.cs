@@ -39,6 +39,7 @@ namespace IronMan
             AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
 
             CallCenter.StartSimulator();
+            //lbAgent.
 
         }
 
@@ -52,6 +53,7 @@ namespace IronMan
         {
             if (!lbAgents.Items.Contains(e.Agent))
                 lbAgents.Items.Add(e.Agent);
+            lbAgents.DisplayMember = "AgentID";
 
         }
 
