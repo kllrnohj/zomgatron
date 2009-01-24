@@ -10,7 +10,13 @@ namespace IronMan
     {
         static private List<PhoneCallEvent> calls = new List<PhoneCallEvent>();
         static private List<Agent> availableAgents = new List<Agent>();
+        static private List<Agent> allAgents = new List<Agent>();
         static public CallCenter CallCenter { get; set; }
+        static private byte haveAvgsPlus = 0xF;
+        static private byte SA = 0x8;
+        static private byte SU = 0x4;
+        static private byte B = 0x2;
+        static private byte SP = 0x1;
 
         static public bool NeedsProcessing()
         {
@@ -25,18 +31,85 @@ namespace IronMan
         static public void AddAvailableAgent(Agent available)
         {
             availableAgents.Add(available);
+            if (haveAvgsPlus != 0)
+            {
+                foreach (Skill s in available.Skills)
+                {
+                    if (s.ProficiencyLevel == ProficiencyLevel.Average || s.ProficiencyLevel == ProficiencyLevel.High)
+                    {
+                        switch (s.SkillType)
+                        {
+                            case SkillType.Billing:
+                                haveAvgsPlus &= (byte)(~B);
+                                break;
+                            case SkillType.Sales:
+                                haveAvgsPlus &= (byte)(~SA);
+                                break;
+                            case SkillType.Spanish:
+                                haveAvgsPlus &= (byte)(~SP);
+                                break;
+                            case SkillType.Support:
+                                haveAvgsPlus &= (byte)(~SU);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        static private int RateAgentOverall(Agent rated)
+        {
+            int result = 0;
+            foreach (Skill s in rated.Skills)
+            {
+                result += HEnumToHInt(s.ProficiencyLevel);
+            }
+            return result;
+        }
+
+        static private bool HOneBetterThanHTwo(int one, int two, Agent a1, Agent a2)
+        {
+            if (one == two)
+            {
+                return RateAgentOverall(a1) < RateAgentOverall(a2) ? true : false;
+            }
+            if (one == 0)
+                return true;
+            if (two == 0)
+                return false;
+
+            if (two > 0 && one > 0)
+            {
+                return RateAgentOverall(a1) < RateAgentOverall(a2) ? true : false;
+            }
+            if (one > 0 && two < 0)
+                return true;
+            if (two > 0 && one < 0)
+                return false;
+
+            if (one < 0 && two < 0)
+                return one > two;
+
+            throw new Exception("Should not get here.");
+            
         }
 
         static public void ProcessQueue()
         {
-            int bestCallVal = 0;
+            int bestCallVal = int.MaxValue;
             int bestCallIndex = -1;
             Agent bestCallsAgent = null;
             for(int x = 0; x < calls.Count; x++)
             {
                 int thisCallChoice;
                 Agent temp = RouteCall(x, out thisCallChoice);
-                if (temp != null && (thisCallChoice > bestCallVal || bestCallsAgent == null))
+                if (bestCallsAgent == null)
+                {
+                    bestCallsAgent = temp;
+                    bestCallVal = thisCallChoice;
+                    bestCallIndex = x;
+                }
+                else if (HOneBetterThanHTwo(thisCallChoice, bestCallVal, temp, bestCallsAgent))
                 {
                     bestCallsAgent = temp;
                     bestCallVal = thisCallChoice;
@@ -44,6 +117,35 @@ namespace IronMan
                 }
             }
 
+            if (bestCallVal <= -3)
+            {
+                if (haveAvgsPlus == 0)
+                    return;
+
+                bool haveAvg = false;
+                foreach (SkillType st in calls[bestCallIndex].SkillsNeeded)
+                {
+                    switch (st)
+                    {
+                        case SkillType.Billing:
+                            if ((haveAvgsPlus & B) == B)
+                                return;
+                            break;
+                        case SkillType.Sales:
+                            if ((haveAvgsPlus & SA) == SA)
+                                return;
+                            break;
+                        case SkillType.Spanish:
+                            if ((haveAvgsPlus & SP) == SP)
+                                return;
+                            break;
+                        case SkillType.Support:
+                            if ((haveAvgsPlus & SU) == SU)
+                                return;
+                            break;
+                    }
+                }
+            }
             if (bestCallsAgent != null)
             {
                 Log.LogString(String.Format("Transferring AgentID:{0} to CallID:{1}", bestCallsAgent.AgentID, calls[bestCallIndex].PhoneCallID));
@@ -62,11 +164,11 @@ namespace IronMan
             switch (pl)
             {
                 case ProficiencyLevel.Average:
-                    return 4;
-                case ProficiencyLevel.High:
-                    return 8;
-                case ProficiencyLevel.Low:
                     return 2;
+                case ProficiencyLevel.High:
+                    return 4;
+                case ProficiencyLevel.Low:
+                    return 1;
                 default:
                     return 1;
             }
@@ -90,25 +192,37 @@ namespace IronMan
                     return -1;
             }
 
-            return awesomeness;
+            return (awesomeness - 4);
         }
 
         static private Agent RouteCall(int callIndex, out int agentStrength)
         {
-            int highest = 0;
+            int curBest = int.MinValue;
+            agentStrength = int.MinValue;
+            int lowestAboveZero = int.MaxValue;
             Agent best = null;
             for(int x = 0; x < availableAgents.Count; x++)
             {
-                int val = HRateAgent(callIndex, x); 
-                if ((val > highest || best == null) && val != -1)
+                int val = HRateAgent(callIndex, x);
+                if (val == -1)
+                    continue;
+                if (best == null)
                 {
                     best = availableAgents[x];
-                    highest = val;
+                    agentStrength = val;
+                    curBest = val;
                 }
-
+                else
+                {
+                    if (HOneBetterThanHTwo(val, curBest, availableAgents[x], best))
+                    {
+                        best = availableAgents[x];
+                        agentStrength = val;
+                        curBest = val;
+                    }
+                }
             }
 
-            agentStrength = highest;
             return best;
         }
     }
