@@ -245,18 +245,18 @@
             this.lblAgentIDValue.AutoSize = true;
             this.lblAgentIDValue.Location = new System.Drawing.Point(81, 37);
             this.lblAgentIDValue.Name = "lblAgentIDValue";
-            this.lblAgentIDValue.Size = new System.Drawing.Size(55, 13);
+            this.lblAgentIDValue.Size = new System.Drawing.Size(27, 13);
             this.lblAgentIDValue.TabIndex = 10;
-            this.lblAgentIDValue.Text = "AGENTID";
+            this.lblAgentIDValue.Text = "N/A";
             // 
             // lblAgentStatusValue
             // 
             this.lblAgentStatusValue.AutoSize = true;
             this.lblAgentStatusValue.Location = new System.Drawing.Point(81, 59);
             this.lblAgentStatusValue.Name = "lblAgentStatusValue";
-            this.lblAgentStatusValue.Size = new System.Drawing.Size(90, 13);
+            this.lblAgentStatusValue.Size = new System.Drawing.Size(27, 13);
             this.lblAgentStatusValue.TabIndex = 8;
-            this.lblAgentStatusValue.Text = "AGENT STATUS";
+            this.lblAgentStatusValue.Text = "N/A";
             // 
             // lblStatus
             // 
@@ -281,9 +281,9 @@
             this.lblTotalCallsValue.AutoSize = true;
             this.lblTotalCallsValue.Location = new System.Drawing.Point(81, 80);
             this.lblTotalCallsValue.Name = "lblTotalCallsValue";
-            this.lblTotalCallsValue.Size = new System.Drawing.Size(75, 13);
+            this.lblTotalCallsValue.Size = new System.Drawing.Size(27, 13);
             this.lblTotalCallsValue.TabIndex = 2;
-            this.lblTotalCallsValue.Text = "TOTALCALLS";
+            this.lblTotalCallsValue.Text = "N/A";
             // 
             // lblTotalCalls
             // 
@@ -445,9 +445,9 @@
             this.lblAvgAgentCallTimeValue.AutoSize = true;
             this.lblAvgAgentCallTimeValue.Location = new System.Drawing.Point(81, 102);
             this.lblAvgAgentCallTimeValue.Name = "lblAvgAgentCallTimeValue";
-            this.lblAvgAgentCallTimeValue.Size = new System.Drawing.Size(81, 13);
+            this.lblAvgAgentCallTimeValue.Size = new System.Drawing.Size(27, 13);
             this.lblAvgAgentCallTimeValue.TabIndex = 13;
-            this.lblAvgAgentCallTimeValue.Text = "ACGCALLTIME";
+            this.lblAvgAgentCallTimeValue.Text = "N/A";
             // 
             // NUIronManForm
             // 
