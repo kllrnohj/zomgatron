@@ -28,6 +28,12 @@ namespace IronMan
             calls.Add(call);
         }
 
+        static public void RemoveAvailableAgent(Agent unavailable)
+        {
+            if (availableAgents.Contains(unavailable))
+                availableAgents.Remove(unavailable);
+        }
+
         static public void AddAvailableAgent(Agent available)
         {
             availableAgents.Add(available);
