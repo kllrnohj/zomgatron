@@ -31,7 +31,16 @@ namespace IronMan
         /// <param name="call"></param>
         private void BindCall(PhoneCallEvent call)
         {
-            
+
+            //clear the required skills listbox and then populate the fields
+            lbRequiredSkills.Items.Clear();
+            foreach (SkillType s in call.SkillsNeeded)
+                lbRequiredSkills.Items.Add(s);
+            lblCallIDValue.Text = call.PhoneCallID.ToString();
+            lblCallAgentIDValue.Text = call.AgentID.ToString();
+            lblCallDurationValue.Text = call.PhoneCallLength.ToString();
+
+           
         }
 
     }
