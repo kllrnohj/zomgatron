@@ -54,7 +54,7 @@ namespace IronMan
             }
         }
 
-        static public int HEnumToHInt(ProficiencyLevel pl)
+        static private int HEnumToHInt(ProficiencyLevel pl)
         {
             switch (pl)
             {
@@ -68,7 +68,7 @@ namespace IronMan
                     return 1;
             }
         }
-        static public int HRateAgent(int callIndex, int agentIndex)
+        static private int HRateAgent(int callIndex, int agentIndex)
         {
             int awesomeness = 1;
 
@@ -84,7 +84,7 @@ namespace IronMan
             return awesomeness;
         }
 
-        static public Agent RouteCall(int callIndex, out int agentStrength)
+        static private Agent RouteCall(int callIndex, out int agentStrength)
         {
             int highest = 0;
             Agent best = null;
