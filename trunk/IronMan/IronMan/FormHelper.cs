@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AgentsAPI;
-
+using System.Windows.Forms.DataVisualization.Charting;
 namespace IronMan
 {
     partial class NUIronManForm : Form
@@ -62,6 +62,60 @@ namespace IronMan
         private void UpdateAgent()
         {
 
+        }
+        /// <summary>
+        /// Generate the data based on what string was passed in.
+        /// </summary>
+        /// <param name="dataToGenerate"></param>
+        private void UpdateData(string dataToGenerate)
+        {
+           // MessageBox.Show(dataToGenerate);
+            switch (dataToGenerate)
+            {
+                case "AvgWaitTime":
+                    GenerateWaitTimeDataPoints();
+                    
+                    break;
+                case "AvgCallTime":
+                    GenerateCallTimeDataPoints();
+                    break;
+            }
+        }
+        /// <summary>
+        /// Generate the datapoints for the average waittime.
+        /// </summary>
+        /// <returns></returns>
+        private List<DataPoint> GenerateWaitTimeDataPoints()
+        {
+            List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            
+            foreach (object o in lbCalls.Items)
+                meList.Add(o as PhoneCallEvent);
+            meList.ToArray<PhoneCallEvent>();
+            double i = 0.0;
+            foreach (PhoneCallEvent pce in meList)
+                series1.Points.Add(new DataPoint(i++, (double)pce.WaitTimeLength));
+           
+            return dataPoints;
+        }
+        /// <summary>
+        /// Generate all of the datapoints for the average calltime
+        /// </summary>
+        /// <returns></returns>
+        private List<DataPoint> GenerateCallTimeDataPoints()
+        {
+            List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
+            List<DataPoint> dataPoints = new List<DataPoint>();
+
+            foreach (object o in lbCalls.Items)
+                meList.Add(o as PhoneCallEvent);
+            meList.ToArray<PhoneCallEvent>();
+            double i = 0.0;
+            foreach (PhoneCallEvent pce in meList)
+                series1.Points.Add(new DataPoint(i++, (double)pce.PhoneCallLength));
+
+            return dataPoints;
         }
     }
 }

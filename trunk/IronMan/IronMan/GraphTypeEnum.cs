@@ -7,7 +7,8 @@ namespace IronMan
 {
     enum GraphData
     {
-        AvgWaitTime,
-        AvgCallTime
+        AvgCallTime,
+        AvgWaitTime
+        
     }
 }
