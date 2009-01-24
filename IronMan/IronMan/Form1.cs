@@ -47,11 +47,34 @@ namespace IronMan
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
 
-            //var List<int> agentIDs  = from avg in lbCalls.Items
-            //        where avg.
 
-            //update the Stats GroupBox
-            // lblPendingCallsValue.Text =
+            //update the stats
+            Agent agent = lbAgents.SelectedItem as Agent;
+            long totalTime = 0, totalWait = 0;
+
+            List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
+
+            foreach (object o in lbCalls.Items)
+                meList.Add(o as PhoneCallEvent);
+
+
+            //get the total number of calls 
+            int totalCalls = (from tc in meList select tc).Count();
+            
+
+            totalTime = (from tc in meList select meList.Sum(n => tc.PhoneCallLength)).FirstOrDefault<long>();
+
+            totalWait = (from tc in meList select meList.Sum(n => tc.WaitTimeLength)).FirstOrDefault<long>();
+
+
+            //now assign the variables
+            if (totalCalls > 0) {
+                lblAvgCallTimeValue.Text = FormatMSToTime(totalTime / totalCalls);
+                lblAvgWaitValue.Text = FormatMSToTime(totalWait / totalCalls);
+            }
+            else
+                lblAvgCallTimeValue.Text = "N/A";
+
         }
 
         void AgentsEventHandler_OnAgentStatusChanged(object sender, AgentStatusChangedEventArguments e)
@@ -59,9 +82,6 @@ namespace IronMan
             if (!lbAgents.Items.Contains(e.Agent))
                 lbAgents.Items.Add(e.Agent);
             lbAgents.DisplayMember = "AgentID";
-
-            //update anything that relies on the agent
-
         }
 
         private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,7 +100,7 @@ namespace IronMan
 
             totalTime = (from tc in meList
                          where tc.AgentID == agent.AgentID
-                         select meList.Sum(n => tc.WaitTimeLength)).SingleOrDefault<long>();
+                         select meList.Sum(n => tc.PhoneCallLength)).FirstOrDefault<long>();
 
             if (totalCalls > 0)
                 lblAvgAgentCallTimeValue.Text = FormatMSToTime(totalTime / totalCalls);
