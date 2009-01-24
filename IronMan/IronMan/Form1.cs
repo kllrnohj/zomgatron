@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using AgentsAPI;
 namespace IronMan
 {
     public partial class NUIronManForm : Form
@@ -37,16 +37,15 @@ namespace IronMan
             AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
             AgentsEventHandler.OnAgentStatusChanged += new EventHandler<AgentStatusChangedEventArguments>(AgentsEventHandler_OnAgentStatusChanged);
             AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
-
+           
             CallCenter.StartSimulator();
-            //lbAgent.
-
         }
 
         void AgentsEventHandler_OnPhoneCall(object sender, PhoneCallEventArguments e)
         {
             if (lbCalls.Items.Contains(e.PhoneCallEvent))
                 lbCalls.Items.Add(e.PhoneCallEvent);
+            lbCalls.DisplayMember = "PhoneCallID";
         }
 
         void AgentsEventHandler_OnAgentStatusChanged(object sender, AgentStatusChangedEventArguments e)
@@ -59,11 +58,11 @@ namespace IronMan
 
         private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //BindAgent();
+            BindAgent(lbAgents.SelectedItem as Agent);
         }
         private void lbCalls_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //BindCall();
+            BindCall(lbCalls.SelectedItem as PhoneCallEvent);
         }
 
 

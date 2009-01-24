@@ -69,13 +69,17 @@
             this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.VisualizerPanel = new System.Windows.Forms.Panel();
             this.gbVisualizerControls = new System.Windows.Forms.GroupBox();
-            this.cbEnableSound = new System.Windows.Forms.CheckBox();
             this.cbEnableVisualization = new System.Windows.Forms.CheckBox();
+            this.cbEnableSound = new System.Windows.Forms.CheckBox();
+            this.dgvAgentSkills = new System.Windows.Forms.DataGridView();
+            this.lblPendingCalls = new System.Windows.Forms.Label();
+            this.lblPendingCallsValue = new System.Windows.Forms.Label();
             this.gbCallInfo.SuspendLayout();
             this.gbAgentInfo.SuspendLayout();
             this.gbStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableSkills)).BeginInit();
             this.gbVisualizerControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).BeginInit();
             this.SuspendLayout();
             // 
             // lbCalls
@@ -99,7 +103,7 @@
             // lblAvgWait
             // 
             this.lblAvgWait.AutoSize = true;
-            this.lblAvgWait.Location = new System.Drawing.Point(6, 60);
+            this.lblAvgWait.Location = new System.Drawing.Point(6, 51);
             this.lblAvgWait.Name = "lblAvgWait";
             this.lblAvgWait.Size = new System.Drawing.Size(75, 13);
             this.lblAvgWait.TabIndex = 2;
@@ -111,6 +115,7 @@
             this.gbCallInfo.Controls.Add(this.lblCallDurationValue);
             this.gbCallInfo.Controls.Add(this.lblCallAgentIDValue);
             this.gbCallInfo.Controls.Add(this.lblCallStatusValue);
+            this.gbCallInfo.Controls.Add(this.lbSkills);
             this.gbCallInfo.Controls.Add(this.lblCallWaitTime);
             this.gbCallInfo.Controls.Add(this.lblDuration);
             this.gbCallInfo.Controls.Add(this.lblCallAgent);
@@ -197,7 +202,7 @@
             // lblAvgAgentDT
             // 
             this.lblAvgAgentDT.AutoSize = true;
-            this.lblAvgAgentDT.Location = new System.Drawing.Point(6, 82);
+            this.lblAvgAgentDT.Location = new System.Drawing.Point(6, 73);
             this.lblAvgAgentDT.Name = "lblAvgAgentDT";
             this.lblAvgAgentDT.Size = new System.Drawing.Size(131, 13);
             this.lblAvgAgentDT.TabIndex = 3;
@@ -205,11 +210,11 @@
             // 
             // gbAgentInfo
             // 
+            this.gbAgentInfo.Controls.Add(this.dgvAgentSkills);
             this.gbAgentInfo.Controls.Add(this.lblAgentIDValue);
             this.gbAgentInfo.Controls.Add(this.lblWorkTimeValue);
             this.gbAgentInfo.Controls.Add(this.lblAgentStatusValue);
             this.gbAgentInfo.Controls.Add(this.lblStatus);
-            this.gbAgentInfo.Controls.Add(this.lbSkills);
             this.gbAgentInfo.Controls.Add(this.lblWorkTime);
             this.gbAgentInfo.Controls.Add(this.lblID);
             this.gbAgentInfo.Controls.Add(this.lblCallsPerHourValue);
@@ -262,7 +267,7 @@
             // lbSkills
             // 
             this.lbSkills.FormattingEnabled = true;
-            this.lbSkills.Location = new System.Drawing.Point(172, 9);
+            this.lbSkills.Location = new System.Drawing.Point(246, 11);
             this.lbSkills.Name = "lbSkills";
             this.lbSkills.Size = new System.Drawing.Size(206, 134);
             this.lbSkills.TabIndex = 6;
@@ -324,7 +329,7 @@
             // lblAvgWaitValue
             // 
             this.lblAvgWaitValue.AutoSize = true;
-            this.lblAvgWaitValue.Location = new System.Drawing.Point(144, 60);
+            this.lblAvgWaitValue.Location = new System.Drawing.Point(144, 51);
             this.lblAvgWaitValue.Name = "lblAvgWaitValue";
             this.lblAvgWaitValue.Size = new System.Drawing.Size(57, 13);
             this.lblAvgWaitValue.TabIndex = 4;
@@ -333,7 +338,7 @@
             // lblAvgAgentDTValue
             // 
             this.lblAvgAgentDTValue.AutoSize = true;
-            this.lblAvgAgentDTValue.Location = new System.Drawing.Point(144, 82);
+            this.lblAvgAgentDTValue.Location = new System.Drawing.Point(144, 73);
             this.lblAvgAgentDTValue.Name = "lblAvgAgentDTValue";
             this.lblAvgAgentDTValue.Size = new System.Drawing.Size(127, 13);
             this.lblAvgAgentDTValue.TabIndex = 5;
@@ -341,6 +346,8 @@
             // 
             // gbStats
             // 
+            this.gbStats.Controls.Add(this.lblPendingCallsValue);
+            this.gbStats.Controls.Add(this.lblPendingCalls);
             this.gbStats.Controls.Add(this.lblAvgCallTimeValue);
             this.gbStats.Controls.Add(this.lblAvgCallPerHourValue);
             this.gbStats.Controls.Add(this.dgvAvailableSkills);
@@ -360,7 +367,7 @@
             // lblAvgCallTimeValue
             // 
             this.lblAvgCallTimeValue.AutoSize = true;
-            this.lblAvgCallTimeValue.Location = new System.Drawing.Point(144, 34);
+            this.lblAvgCallTimeValue.Location = new System.Drawing.Point(144, 25);
             this.lblAvgCallTimeValue.Name = "lblAvgCallTimeValue";
             this.lblAvgCallTimeValue.Size = new System.Drawing.Size(81, 13);
             this.lblAvgCallTimeValue.TabIndex = 10;
@@ -369,7 +376,7 @@
             // lblAvgCallPerHourValue
             // 
             this.lblAvgCallPerHourValue.AutoSize = true;
-            this.lblAvgCallPerHourValue.Location = new System.Drawing.Point(144, 112);
+            this.lblAvgCallPerHourValue.Location = new System.Drawing.Point(144, 96);
             this.lblAvgCallPerHourValue.Name = "lblAvgCallPerHourValue";
             this.lblAvgCallPerHourValue.Size = new System.Drawing.Size(109, 13);
             this.lblAvgCallPerHourValue.TabIndex = 9;
@@ -411,7 +418,7 @@
             // lblCallPerHour
             // 
             this.lblCallPerHour.AutoSize = true;
-            this.lblCallPerHour.Location = new System.Drawing.Point(6, 112);
+            this.lblCallPerHour.Location = new System.Drawing.Point(6, 96);
             this.lblCallPerHour.Name = "lblCallPerHour";
             this.lblCallPerHour.Size = new System.Drawing.Size(104, 13);
             this.lblCallPerHour.TabIndex = 7;
@@ -420,7 +427,7 @@
             // lblAvgCallDuration
             // 
             this.lblAvgCallDuration.AutoSize = true;
-            this.lblAvgCallDuration.Location = new System.Drawing.Point(6, 34);
+            this.lblAvgCallDuration.Location = new System.Drawing.Point(6, 25);
             this.lblAvgCallDuration.Name = "lblAvgCallDuration";
             this.lblAvgCallDuration.Size = new System.Drawing.Size(96, 13);
             this.lblAvgCallDuration.TabIndex = 6;
@@ -450,6 +457,16 @@
             this.gbVisualizerControls.TabStop = false;
             this.gbVisualizerControls.Text = "Visualizer Controls";
             // 
+            // cbEnableVisualization
+            // 
+            this.cbEnableVisualization.AutoSize = true;
+            this.cbEnableVisualization.Location = new System.Drawing.Point(9, 19);
+            this.cbEnableVisualization.Name = "cbEnableVisualization";
+            this.cbEnableVisualization.Size = new System.Drawing.Size(120, 17);
+            this.cbEnableVisualization.TabIndex = 1;
+            this.cbEnableVisualization.Text = "Enable Visualization";
+            this.cbEnableVisualization.UseVisualStyleBackColor = true;
+            // 
             // cbEnableSound
             // 
             this.cbEnableSound.AutoSize = true;
@@ -460,15 +477,31 @@
             this.cbEnableSound.Text = "EnableSound";
             this.cbEnableSound.UseVisualStyleBackColor = true;
             // 
-            // cbEnableVisualization
+            // dgvAgentSkills
             // 
-            this.cbEnableVisualization.AutoSize = true;
-            this.cbEnableVisualization.Location = new System.Drawing.Point(9, 19);
-            this.cbEnableVisualization.Name = "cbEnableVisualization";
-            this.cbEnableVisualization.Size = new System.Drawing.Size(120, 17);
-            this.cbEnableVisualization.TabIndex = 1;
-            this.cbEnableVisualization.Text = "Enable Visualization";
-            this.cbEnableVisualization.UseVisualStyleBackColor = true;
+            this.dgvAgentSkills.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAgentSkills.Location = new System.Drawing.Point(167, 9);
+            this.dgvAgentSkills.Name = "dgvAgentSkills";
+            this.dgvAgentSkills.Size = new System.Drawing.Size(212, 136);
+            this.dgvAgentSkills.TabIndex = 11;
+            // 
+            // lblPendingCalls
+            // 
+            this.lblPendingCalls.AutoSize = true;
+            this.lblPendingCalls.Location = new System.Drawing.Point(6, 119);
+            this.lblPendingCalls.Name = "lblPendingCalls";
+            this.lblPendingCalls.Size = new System.Drawing.Size(74, 13);
+            this.lblPendingCalls.TabIndex = 11;
+            this.lblPendingCalls.Text = "Pending Calls:";
+            // 
+            // lblPendingCallsValue
+            // 
+            this.lblPendingCallsValue.AutoSize = true;
+            this.lblPendingCallsValue.Location = new System.Drawing.Point(147, 118);
+            this.lblPendingCallsValue.Name = "lblPendingCallsValue";
+            this.lblPendingCallsValue.Size = new System.Drawing.Size(89, 13);
+            this.lblPendingCallsValue.TabIndex = 12;
+            this.lblPendingCallsValue.Text = "PENDINGCALLS";
             // 
             // NUIronManForm
             // 
@@ -494,6 +527,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableSkills)).EndInit();
             this.gbVisualizerControls.ResumeLayout(false);
             this.gbVisualizerControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -542,6 +576,9 @@
         private System.Windows.Forms.GroupBox gbVisualizerControls;
         private System.Windows.Forms.CheckBox cbEnableVisualization;
         private System.Windows.Forms.CheckBox cbEnableSound;
+        private System.Windows.Forms.DataGridView dgvAgentSkills;
+        private System.Windows.Forms.Label lblPendingCallsValue;
+        private System.Windows.Forms.Label lblPendingCalls;
     }
 }
 
