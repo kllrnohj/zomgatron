@@ -47,6 +47,10 @@
             this.lblAvgAgentDTValue = new System.Windows.Forms.Label();
             this.gbStats = new System.Windows.Forms.GroupBox();
             this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblCallStatus = new System.Windows.Forms.Label();
+            this.lblCallAgent = new System.Windows.Forms.Label();
+            this.lblDuration = new System.Windows.Forms.Label();
+            this.gbCallInfo.SuspendLayout();
             this.gbAgentInfo.SuspendLayout();
             this.gbStats.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +83,9 @@
             // 
             // gbCallInfo
             // 
+            this.gbCallInfo.Controls.Add(this.lblDuration);
+            this.gbCallInfo.Controls.Add(this.lblCallAgent);
+            this.gbCallInfo.Controls.Add(this.lblCallStatus);
             this.gbCallInfo.Location = new System.Drawing.Point(400, 13);
             this.gbCallInfo.Name = "gbCallInfo";
             this.gbCallInfo.Size = new System.Drawing.Size(469, 196);
@@ -220,6 +227,33 @@
             this.ProccessQueueTimer.Interval = 10;
             this.ProccessQueueTimer.Tick += new System.EventHandler(this.ProccessQueueTimer_Tick);
             // 
+            // lblCallStatus
+            // 
+            this.lblCallStatus.AutoSize = true;
+            this.lblCallStatus.Location = new System.Drawing.Point(6, 28);
+            this.lblCallStatus.Name = "lblCallStatus";
+            this.lblCallStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblCallStatus.TabIndex = 0;
+            this.lblCallStatus.Text = "Satus:";
+            // 
+            // lblCallAgent
+            // 
+            this.lblCallAgent.AutoSize = true;
+            this.lblCallAgent.Location = new System.Drawing.Point(6, 50);
+            this.lblCallAgent.Name = "lblCallAgent";
+            this.lblCallAgent.Size = new System.Drawing.Size(38, 13);
+            this.lblCallAgent.TabIndex = 1;
+            this.lblCallAgent.Text = "Agent:";
+            // 
+            // lblDuration
+            // 
+            this.lblDuration.AutoSize = true;
+            this.lblDuration.Location = new System.Drawing.Point(6, 76);
+            this.lblDuration.Name = "lblDuration";
+            this.lblDuration.Size = new System.Drawing.Size(50, 13);
+            this.lblDuration.TabIndex = 2;
+            this.lblDuration.Text = "Duration:";
+            // 
             // NUIronManForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,6 +266,8 @@
             this.Controls.Add(this.lbCalls);
             this.Name = "NUIronManForm";
             this.Text = "NUIronMan";
+            this.gbCallInfo.ResumeLayout(false);
+            this.gbCallInfo.PerformLayout();
             this.gbAgentInfo.ResumeLayout(false);
             this.gbAgentInfo.PerformLayout();
             this.gbStats.ResumeLayout(false);
@@ -260,6 +296,9 @@
         private System.Windows.Forms.GroupBox gbStats;
         private System.Windows.Forms.Timer ProccessQueueTimer;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblDuration;
+        private System.Windows.Forms.Label lblCallAgent;
+        private System.Windows.Forms.Label lblCallStatus;
     }
 }
 
