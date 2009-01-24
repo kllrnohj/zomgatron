@@ -94,6 +94,7 @@
             this.lbAgents.Name = "lbAgents";
             this.lbAgents.Size = new System.Drawing.Size(183, 524);
             this.lbAgents.TabIndex = 1;
+            this.lbAgents.SelectedIndexChanged += new System.EventHandler(this.lbAgents_SelectedIndexChanged);
             // 
             // lblAvgWait
             // 

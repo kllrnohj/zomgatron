@@ -19,10 +19,7 @@ namespace IronMan
             InitializeComponent();
         }
 
-        private void lbCalls_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void ProccessQueueTimer_Tick(object sender, EventArgs e)
         {
@@ -40,6 +37,9 @@ namespace IronMan
             AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
             AgentsEventHandler.OnAgentStatusChanged += new EventHandler<AgentStatusChangedEventArguments>(AgentsEventHandler_OnAgentStatusChanged);
             AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
+
+            CallCenter.StartSimulator();
+
         }
 
         void AgentsEventHandler_OnPhoneCall(object sender, PhoneCallEventArguments e)
@@ -53,6 +53,15 @@ namespace IronMan
             if (!lbAgents.Items.Contains(e.Agent))
                 lbAgents.Items.Add(e.Agent);
 
+        }
+
+        private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //BindAgent();
+        }
+        private void lbCalls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //BindCall();
         }
 
 
