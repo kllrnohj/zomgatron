@@ -70,11 +70,13 @@ namespace IronMan
             //get the total number of calls 
             int totalCalls = (from tc in meList select tc).Count();
             
-
+            //get the total time for and the total wait time
             totalTime = (from tc in meList select meList.Sum(n => tc.PhoneCallLength)).FirstOrDefault<long>();
-
             totalWait = (from tc in meList select meList.Sum(n => tc.WaitTimeLength)).FirstOrDefault<long>();
 
+            //find out if there are any unassigned phone calls
+
+            lblPendingCallsValue.Text = (from tc in meList where tc.AgentID == 0 select tc).Count().ToString();
 
             //now assign the variables
             if (totalCalls > 0) {
