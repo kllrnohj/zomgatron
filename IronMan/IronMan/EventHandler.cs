@@ -14,7 +14,7 @@ namespace IronMan
 
     class AgentStatusChangedEventArguments : EventArgs
     {
-        public Agent Agent { get; set; }
+        public AgentContainer Agent { get; set; }
     }
 
     class AgentsAPIEventHandler : IAgentStatusObserver, IPhoneCallObserver
@@ -65,7 +65,7 @@ namespace IronMan
             if (Dispatcher.NeedsProcessing())
                 Dispatcher.ProcessQueue();
 
-            OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = agent });
+            OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = new AgentContainer() { Agent = agent } });
         }
 
         #endregion

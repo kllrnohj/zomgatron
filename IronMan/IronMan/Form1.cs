@@ -9,6 +9,28 @@ using System.Windows.Forms;
 using AgentsAPI;
 namespace IronMan
 {
+    public class AgentContainer
+    {
+        public Agent Agent { get; set; }
+        public override string ToString()
+        {
+            return String.Format("{0}: {1}", Agent.AgentID, Agent.AgentStatusType);
+        }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                var other = (AgentContainer)obj;
+                return Agent.AgentID == other.Agent.AgentID;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
+
     public partial class NUIronManForm : Form
     {
         private AgentsAPIEventHandler AgentsEventHandler { get; set; }
@@ -56,9 +78,9 @@ namespace IronMan
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
 
-
+            if (lbAgents.SelectedValue == null) return;
             //update the stats
-            Agent agent = lbAgents.SelectedItem as Agent;
+            Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
             long totalTime = 0, totalWait = 0;
 
             List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
@@ -92,12 +114,16 @@ namespace IronMan
         {
             if (!lbAgents.Items.Contains(e.Agent))
                 lbAgents.Items.Add(e.Agent);
-            lbAgents.DisplayMember = "AgentID";
+            else
+            {
+                int indx = lbAgents.Items.IndexOf(e.Agent);
+                lbAgents.Items[indx] = lbAgents.Items[indx];
+            }
         }
 
         private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Agent agent = lbAgents.SelectedItem as Agent;
+            Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
             List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
 
             foreach (object o in lbCalls.Items)
