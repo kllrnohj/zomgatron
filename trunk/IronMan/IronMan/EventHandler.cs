@@ -23,7 +23,7 @@ namespace IronMan
 
         public void PhoneCallReceived(PhoneCallEvent callDetails)
         {
-            throw new NotImplementedException();
+            
         }
 
         #endregion
@@ -32,7 +32,7 @@ namespace IronMan
 
         public void AgentStatusChanged(Agent agent)
         {
-            throw new NotImplementedException();
+            
         }
 
         #endregion
