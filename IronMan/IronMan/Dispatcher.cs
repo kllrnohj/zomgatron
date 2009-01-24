@@ -46,9 +46,10 @@ namespace IronMan
 
             if (bestCallsAgent != null)
             {
-                CallCenter.TransferCall(calls[bestCallIndex].PhoneCallID, bestCallsAgent.AgentID);
+                PhoneCallEvent pce = calls[bestCallIndex];
                 calls.RemoveAt(bestCallIndex);
                 availableAgents.Remove(bestCallsAgent);
+                CallCenter.TransferCall(pce.PhoneCallID, bestCallsAgent.AgentID);
 
                 if (NeedsProcessing())
                     ProcessQueue();
