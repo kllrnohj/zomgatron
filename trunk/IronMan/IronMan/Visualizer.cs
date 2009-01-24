@@ -10,7 +10,7 @@ namespace IronMan
     {
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            /*Graphics g = e.Graphics;
             Pen pen = (Pen)new Pen(Color.Green, 1.0f).Clone();
             g.Clear(Color.Black);
             for (int x = 7; x > 3; x--)
@@ -19,7 +19,7 @@ namespace IronMan
                 Rectangle ellipse = new Rectangle(30, 30, x, x);
                 g.DrawEllipse(pen, ellipse);
             }
-            base.OnPaint(e);
+            base.OnPaint(e);*/
         }
     }
 }
