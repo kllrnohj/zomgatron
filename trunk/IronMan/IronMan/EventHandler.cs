@@ -61,6 +61,8 @@ namespace IronMan
             Log.LogString(String.Format("Agent Status Changed: {0}, {1}, {2}", agent.AgentID, agent.AgentStatusType, skills));
             if (agent.AgentStatusType == AgentStatusType.Available)
                 Dispatcher.AddAvailableAgent(agent);
+            if (agent.AgentStatusType == AgentStatusType.Unavailable)
+                Dispatcher.RemoveAvailableAgent(agent);
             
             if (Dispatcher.NeedsProcessing())
                 Dispatcher.ProcessQueue();
