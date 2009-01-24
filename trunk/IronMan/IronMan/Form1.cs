@@ -11,6 +11,9 @@ namespace IronMan
 {
     public partial class NUIronManForm : Form
     {
+        private AgentsAPIEventHandler AgentsEventHandler { get; set; }
+        private AgentsAPI.CallCenter CallCenter { get; set; }
+
         public NUIronManForm()
         {
             InitializeComponent();
@@ -30,5 +33,14 @@ namespace IronMan
                 ProccessQueueTimer.Enabled = true;
             }
         }
+
+        private void NUIronManForm_Load(object sender, EventArgs e)
+        {
+            CallCenter = new AgentsAPI.CallCenter();
+            AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
+            //AgentsEventHandler.On
+        }
+
+        
     }
 }
