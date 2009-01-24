@@ -39,15 +39,18 @@ namespace IronMan
             lblCallIDValue.Text = call.PhoneCallID.ToString();
             lblCallAgentIDValue.Text = call.AgentID.ToString();
 
-            t = TimeSpan.FromMilliseconds((double)call.PhoneCallLength);
-            lblCallDurationValue.Text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
+     
+            lblCallDurationValue.Text = FormatMSToTime(call.PhoneCallLength);
 
-            t =  TimeSpan.FromMilliseconds((double)call.WaitTimeLength);
-            lblWaitTimeValue.Text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
+            lblWaitTimeValue.Text = FormatMSToTime(call.WaitTimeLength);
 
 
            
         }
+        private string FormatMSToTime(long ms) {
+            TimeSpan t = TimeSpan.FromMilliseconds((double)ms);
 
+            return string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
+        }
     }
 }
