@@ -26,13 +26,31 @@ namespace IronMan
             availableAgents.Add(available);
         }
 
-        static public void ProcessQueue()
+        static public void ProcessQueue(CallCenter c)
         {
             int bestCallVal = 0;
             int bestCallIndex = -1;
+            Agent bestCallsAgent = null;
             for(int x = 0; x < calls.Count; x++)
             {
                 int thisCallChoice;
+                Agent temp = RouteCall(x, out thisCallChoice);
+                if (temp != null && (thisCallChoice > bestCallVal || bestCallsAgent == null))
+                {
+                    bestCallsAgent = temp;
+                    bestCallVal = thisCallChoice;
+                    bestCallIndex = x;
+                }
+            }
+
+            if (bestCallsAgent != null)
+            {
+                c.TransferCall(calls[bestCallIndex].PhoneCallID, bestCallsAgent.AgentID);
+                calls.RemoveAt(bestCallIndex);
+                availableAgents.Remove(bestCallsAgent);
+
+                if (NeedsProcessing())
+                    ProcessQueue(c);
             }
         }
 
@@ -42,13 +60,10 @@ namespace IronMan
             {
                 case ProficiencyLevel.Average:
                     return 4;
-                    break;
                 case ProficiencyLevel.High:
                     return 8;
-                    break;
                 case ProficiencyLevel.Low:
                     return 2;
-                    break;
                 default:
                     return 1;
             }
@@ -57,17 +72,19 @@ namespace IronMan
         {
             int awesomeness = (availableAgents[agentIndex].AgentStatusType == AgentStatusType.Unavailable || availableAgents[agentIndex].AgentStatusType == AgentStatusType.OnCall) ? 0 : 1;
 
-            foreach (Skill s in calls[callIndex].SkillsNeeded)
+            foreach (SkillType s in calls[callIndex].SkillsNeeded)
             {
-                if(availableAgents[agentIndex].Skills.Contains(s)){
-                    awesomeness *= HEnumToHInt(availableAgents[agentIndex].Skills[availableAgents[agentIndex].Skills.IndexOf(s)].ProficiencyLevel);
+                for (int x = 0; x < availableAgents[agentIndex].Skills.Count; x++)
+                {
+                    if(availableAgents[agentIndex].Skills[x].SkillType == s)
+                        awesomeness *= HEnumToHInt(availableAgents[agentIndex].Skills[x].ProficiencyLevel);
                 }
             }
 
             return awesomeness;
         }
 
-        static public Agent RouteCall(CallCenter callcenter, int callIndex, out int agentStrength)
+        static public Agent RouteCall(int callIndex, out int agentStrength)
         {
             int highest = 0;
             Agent best = null;
