@@ -32,7 +32,10 @@ namespace IronMan
 
         public void AgentStatusChanged(Agent agent)
         {
-            
+            if (!agents.ContainsKey(agent.AgentID))
+                agents.Add(agent.AgentID, agent);
+            else
+                agents[agent.AgentID] = agent;
         }
 
         #endregion
