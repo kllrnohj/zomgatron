@@ -68,11 +68,11 @@ namespace IronMan
 
 
             //get the total number of calls 
-            int totalCalls = (from tc in meList select tc).Count();
+            int totalCalls = CallCenter.CallsCompleted; //(from tc in meList select tc).Count();
             
             //get the total time for and the total wait time
-            totalTime = (from tc in meList select meList.Sum(n => tc.PhoneCallLength)).FirstOrDefault<long>();
-            totalWait = (from tc in meList select meList.Sum(n => tc.WaitTimeLength)).FirstOrDefault<long>();
+            totalTime = meList.Sum(n => n.PhoneCallLength);
+            totalWait = meList.Sum(n => n.WaitTimeLength);
 
             //find out if there are any unassigned phone calls
 
@@ -81,7 +81,7 @@ namespace IronMan
             //now assign the variables
             if (totalCalls > 0) {
                 lblAvgCallTimeValue.Text = FormatMSToTime(totalTime / totalCalls);
-                lblAvgWaitValue.Text = FormatMSToTime(totalWait / totalCalls);
+                lblAvgWaitValue.Text = String.Format("{0} ms", (totalWait / totalCalls));
             }
             else
                 lblAvgCallTimeValue.Text = "N/A";
@@ -116,7 +116,7 @@ namespace IronMan
 
             totalTime = (from tc in meList
                          where tc.AgentID == agent.AgentID
-                         select meList.Sum(n => tc.PhoneCallLength)).FirstOrDefault<long>();
+                         select tc).Sum(n => n.PhoneCallLength);
 
             if (totalCalls > 0)
                 lblAvgAgentCallTimeValue.Text = FormatMSToTime(totalTime / totalCalls);
