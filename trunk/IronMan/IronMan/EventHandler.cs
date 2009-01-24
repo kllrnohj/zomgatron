@@ -34,7 +34,8 @@ namespace IronMan
 
         public void PhoneCallReceived(PhoneCallEvent callDetails)
         {
-            Dispatcher.AddPhoneCall(callDetails);
+            if (!callDetails.IsTransfered)
+                Dispatcher.AddPhoneCall(callDetails);
             OnPhoneCall(this, new PhoneCallEventArguments() { PhoneCallEvent = callDetails });
 
             if (Dispatcher.NeedsProcessing())
