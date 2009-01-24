@@ -13,7 +13,6 @@ namespace IronMan
     {
         private AgentsAPIEventHandler AgentsEventHandler { get; set; }
         private AgentsAPI.CallCenter CallCenter { get; set; }
-        bool done = false;
 
         public NUIronManForm()
         {
@@ -24,14 +23,6 @@ namespace IronMan
 
         private void ProccessQueueTimer_Tick(object sender, EventArgs e)
         {
-            if (done) return;
-            if (CallCenter.CallsCompleted == CallCenter.TotalCalls)
-            {
-                Log.LogString(String.Format("Calls: {0}, Score: {1}, Penalty: {2}", CallCenter.TotalCalls, CallCenter.TotalScore, CallCenter.TotalPenaltyTime));
-                System.Windows.Forms.MessageBox.Show("Done!");
-                ProccessQueueTimer.Enabled = false;
-                done = true;
-            }
             if (Dispatcher.NeedsProcessing())
             {
                 ProccessQueueTimer.Enabled = false;
@@ -82,14 +73,20 @@ namespace IronMan
                 meList.Add(o as PhoneCallEvent);
 
             //get the total number of calls 
-
             int totalCalls = (from tc in meList
-                                       where tc.AgentID == agent.AgentID
-                                       select tc).Count();
-           /* int totalTime = (from tc in meList
+                              where tc.AgentID == agent.AgentID
+                              select tc).Count();
+            long totalTime = 0;
+            try
+            {
+                totalTime = (from tc in meList
                              where tc.AgentID == agent.AgentID
-                             select meList.Sum(n =>  = tc.AgentID);*/
+                             select meList.Sum(n => tc.WaitTimeLength)).Single<long>();
+            }
+            catch (Exception) { }
 
+            if (totalCalls > 0)
+                lblAvgCallTime.Text = FormatMSToTime(totalTime / totalCalls);
             lblTotalCallsValue.Text = totalCalls.ToString();
             BindAgent(agent);
         }
