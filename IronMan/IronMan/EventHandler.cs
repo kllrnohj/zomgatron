@@ -34,6 +34,10 @@ namespace IronMan
 
         public void PhoneCallReceived(PhoneCallEvent callDetails)
         {
+            string skills = "";
+            foreach (var s in callDetails.SkillsNeeded)
+                skills += s + ",";
+            Log.LogString(String.Format("Receiving Call: {0}, {1}, {2}", callDetails.PhoneCallID, callDetails.IsTransfered, skills));
             if (!callDetails.IsTransfered)
                 Dispatcher.AddPhoneCall(callDetails);
             OnPhoneCall(this, new PhoneCallEventArguments() { PhoneCallEvent = callDetails });
@@ -48,6 +52,10 @@ namespace IronMan
 
         public void AgentStatusChanged(Agent agent)
         {
+            string skills = "";
+            foreach (var s in agent.Skills)
+                skills += String.Format("{0}:{1} ", s.SkillType, s.ProficiencyLevel);
+            Log.LogString(String.Format("Agent Status Changed: {0}, {1}, {2}", agent.AgentID, agent.AgentStatusType, skills));
             if (agent.AgentStatusType == AgentStatusType.Available)
                 Dispatcher.AddAvailableAgent(agent);
             OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = agent });
