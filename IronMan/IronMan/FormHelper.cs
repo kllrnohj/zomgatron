@@ -17,8 +17,7 @@ namespace IronMan
         {
             if (agent != null)
             {
-                lbSkills.Items.Clear();
-
+              
                 dgvAgentSkills.DataSource = agent.Skills;
               
                 lblAgentIDValue.Text = agent.AgentID.ToString();
@@ -31,15 +30,21 @@ namespace IronMan
         /// <param name="call"></param>
         private void BindCall(PhoneCallEvent call)
         {
-
+            TimeSpan t;
             //clear the required skills listbox and then populate the fields
             lbRequiredSkills.Items.Clear();
             foreach (SkillType s in call.SkillsNeeded)
                 lbRequiredSkills.Items.Add(s);
+
             lblCallIDValue.Text = call.PhoneCallID.ToString();
             lblCallAgentIDValue.Text = call.AgentID.ToString();
-            lblCallDurationValue.Text = call.PhoneCallLength.ToString();
-            lblWaitTimeValue.Text = call.WaitTimeLength.ToString();
+
+            t = TimeSpan.FromMilliseconds((double)call.PhoneCallLength);
+            lblCallDurationValue.Text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
+
+            t =  TimeSpan.FromMilliseconds((double)call.WaitTimeLength);
+            lblWaitTimeValue.Text = string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
+
 
            
         }

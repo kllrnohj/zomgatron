@@ -46,7 +46,7 @@ namespace IronMan
             AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
             AgentsEventHandler.OnAgentStatusChanged += new EventHandler<AgentStatusChangedEventArguments>(AgentsEventHandler_OnAgentStatusChanged);
             AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
-           
+
             CallCenter.StartSimulator();
         }
 
@@ -55,6 +55,12 @@ namespace IronMan
             if (!lbCalls.Items.Contains(e.PhoneCallEvent))
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
+
+            //var List<int> agentIDs  = from avg in lbCalls.Items
+            //        where avg.
+
+            //update the Stats GroupBox
+            // lblPendingCallsValue.Text =
         }
 
         void AgentsEventHandler_OnAgentStatusChanged(object sender, AgentStatusChangedEventArguments e)
@@ -63,16 +69,39 @@ namespace IronMan
                 lbAgents.Items.Add(e.Agent);
             lbAgents.DisplayMember = "AgentID";
 
+            //update anything that relies on the agent
+
         }
 
         private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BindAgent(lbAgents.SelectedItem as Agent);
+            Agent agent = lbAgents.SelectedItem as Agent;
+            List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
+
+            foreach (object o in lbCalls.Items)
+                meList.Add(o as PhoneCallEvent);
+
+            //get the total number of calls 
+
+            int totalCalls = (from tc in meList
+                                       where tc.AgentID == agent.AgentID
+                                       select tc).Count();
+           /* int totalTime = (from tc in meList
+                             where tc.AgentID == agent.AgentID
+                             select meList.Sum(n =>  = tc.AgentID);*/
+
+            lblTotalCallsValue.Text = totalCalls.ToString();
+            BindAgent(agent);
         }
+
         private void lbCalls_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BindCall(lbCalls.SelectedItem as PhoneCallEvent);
+            PhoneCallEvent call = lbCalls.SelectedItem as PhoneCallEvent;
+            BindCall(call);
         }
+
+
+
 
 
 
