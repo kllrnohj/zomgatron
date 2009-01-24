@@ -17,11 +17,11 @@ namespace IronMan
         {
             if (agent != null)
             {
-              
+
                 dgvAgentSkills.DataSource = agent.Skills;
-              
+
                 lblAgentIDValue.Text = agent.AgentID.ToString();
-                lblAgentStatusValue.Text = agent.AgentStatusType.ToString() ;
+                lblAgentStatusValue.Text = agent.AgentStatusType.ToString();
             }
         }
         /// <summary>
@@ -30,26 +30,29 @@ namespace IronMan
         /// <param name="call"></param>
         private void BindCall(PhoneCallEvent call)
         {
-            TimeSpan t;
-            //clear the required skills listbox and then populate the fields
-            lbRequiredSkills.Items.Clear();
-            foreach (SkillType s in call.SkillsNeeded)
-                lbRequiredSkills.Items.Add(s);
+            if (call != null)
+            {
+                TimeSpan t;
+                //clear the required skills listbox and then populate the fields
+                lbRequiredSkills.Items.Clear();
+                foreach (SkillType s in call.SkillsNeeded)
+                    lbRequiredSkills.Items.Add(s);
 
-            lblCallIDValue.Text = call.PhoneCallID.ToString();
-            lblCallAgentIDValue.Text = call.AgentID.ToString();
-
-     
-            lblCallDurationValue.Text = FormatMSToTime(call.PhoneCallLength);
-
-            lblWaitTimeValue.Text = FormatMSToTime(call.WaitTimeLength);
+                lblCallIDValue.Text = call.PhoneCallID.ToString();
+                lblCallAgentIDValue.Text = call.AgentID.ToString();
 
 
-           
+                lblCallDurationValue.Text = FormatMSToTime(call.PhoneCallLength);
+
+                lblWaitTimeValue.Text = FormatMSToTime(call.WaitTimeLength);
+
+
+            }
         }
-        private string FormatMSToTime(long ms) {
+        private string FormatMSToTime(long ms)
+        {
             TimeSpan t = TimeSpan.FromMilliseconds((double)ms);
-           
+
             return string.Format("{0:D2}h:{1:D2}m:{2:D2}s", t.Hours, t.Minutes, t.Seconds);
         }
     }
