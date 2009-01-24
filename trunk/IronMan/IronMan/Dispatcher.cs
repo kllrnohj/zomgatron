@@ -122,7 +122,6 @@ namespace IronMan
                 if (haveAvgsPlus == 0)
                     return;
 
-                bool haveAvg = false;
                 foreach (SkillType st in calls[bestCallIndex].SkillsNeeded)
                 {
                     switch (st)
@@ -199,7 +198,6 @@ namespace IronMan
         {
             int curBest = int.MinValue;
             agentStrength = int.MinValue;
-            int lowestAboveZero = int.MaxValue;
             Agent best = null;
             for(int x = 0; x < availableAgents.Count; x++)
             {

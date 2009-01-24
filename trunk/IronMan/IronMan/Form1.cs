@@ -155,11 +155,6 @@ namespace IronMan
             BindCall(call);
         }
 
-        private void dgvAvailableSkills_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
 
 
 
