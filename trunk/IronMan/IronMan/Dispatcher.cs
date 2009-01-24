@@ -31,7 +31,37 @@ namespace IronMan
         static public void RemoveAvailableAgent(Agent unavailable)
         {
             if (availableAgents.Contains(unavailable))
+            {
                 availableAgents.Remove(unavailable);
+                haveAvgsPlus = 0xF;
+
+                foreach (Agent agent in availableAgents)
+                {
+                    foreach (Skill s in agent.Skills)
+                    {
+                        if (s.ProficiencyLevel == ProficiencyLevel.Average || s.ProficiencyLevel == ProficiencyLevel.High)
+                        {
+                            switch (s.SkillType)
+                            {
+                                case SkillType.Billing:
+                                    haveAvgsPlus &= (byte)(~B);
+                                    break;
+                                case SkillType.Sales:
+                                    haveAvgsPlus &= (byte)(~SA);
+                                    break;
+                                case SkillType.Spanish:
+                                    haveAvgsPlus &= (byte)(~SP);
+                                    break;
+                                case SkillType.Support:
+                                    haveAvgsPlus &= (byte)(~SU);
+                                    break;
+                            }
+                        }
+                    }
+                    if (haveAvgsPlus == 0)
+                        break;
+                }
+            }
         }
 
         static public void AddAvailableAgent(Agent available)
