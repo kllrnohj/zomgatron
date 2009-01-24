@@ -56,13 +56,13 @@ namespace IronMan
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
 
-            if (lbAgents.SelectedValue == null) return;
+            //if (lbAgents.SelectedItem == null) return;
             //update the stats
-            Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
+            //Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
             long totalTime = 0, totalWait = 0;
 
             List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
-
+            
             foreach (object o in lbCalls.Items)
                 meList.Add(o as PhoneCallEvent);
 
