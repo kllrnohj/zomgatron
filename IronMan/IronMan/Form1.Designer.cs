@@ -35,16 +35,16 @@
             this.gbCallInfo = new System.Windows.Forms.GroupBox();
             this.lblAvgAgentDT = new System.Windows.Forms.Label();
             this.gbAgentInfo = new System.Windows.Forms.GroupBox();
-            this.lblCallsPerHour = new System.Windows.Forms.Label();
+            this.lbSkills = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCallsPerHourValue = new System.Windows.Forms.Label();
+            this.lblTotalCallsValue = new System.Windows.Forms.Label();
             this.lblTotalCalls = new System.Windows.Forms.Label();
+            this.lblCallsPerHour = new System.Windows.Forms.Label();
             this.lblAvgWaitValue = new System.Windows.Forms.Label();
             this.lblAvgAgentDTValue = new System.Windows.Forms.Label();
-            this.lblTotalCallsValue = new System.Windows.Forms.Label();
-            this.lblCallsPerHourValue = new System.Windows.Forms.Label();
             this.gbStats = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lbSkills = new System.Windows.Forms.ListBox();
             this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.gbAgentInfo.SuspendLayout();
             this.gbStats.SuspendLayout();
@@ -110,14 +110,49 @@
             this.gbAgentInfo.TabStop = false;
             this.gbAgentInfo.Text = "Agent Info";
             // 
-            // lblCallsPerHour
+            // lbSkills
             // 
-            this.lblCallsPerHour.AutoSize = true;
-            this.lblCallsPerHour.Location = new System.Drawing.Point(6, 118);
-            this.lblCallsPerHour.Name = "lblCallsPerHour";
-            this.lblCallsPerHour.Size = new System.Drawing.Size(66, 13);
-            this.lblCallsPerHour.TabIndex = 0;
-            this.lblCallsPerHour.Text = "Calls / Hour:";
+            this.lbSkills.FormattingEnabled = true;
+            this.lbSkills.Location = new System.Drawing.Point(9, 161);
+            this.lbSkills.Name = "lbSkills";
+            this.lbSkills.Size = new System.Drawing.Size(93, 160);
+            this.lbSkills.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "label2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "label1";
+            // 
+            // lblCallsPerHourValue
+            // 
+            this.lblCallsPerHourValue.AutoSize = true;
+            this.lblCallsPerHourValue.Location = new System.Drawing.Point(111, 118);
+            this.lblCallsPerHourValue.Name = "lblCallsPerHourValue";
+            this.lblCallsPerHourValue.Size = new System.Drawing.Size(35, 13);
+            this.lblCallsPerHourValue.TabIndex = 3;
+            this.lblCallsPerHourValue.Text = "label1";
+            // 
+            // lblTotalCallsValue
+            // 
+            this.lblTotalCallsValue.AutoSize = true;
+            this.lblTotalCallsValue.Location = new System.Drawing.Point(111, 87);
+            this.lblTotalCallsValue.Name = "lblTotalCallsValue";
+            this.lblTotalCallsValue.Size = new System.Drawing.Size(35, 13);
+            this.lblTotalCallsValue.TabIndex = 2;
+            this.lblTotalCallsValue.Text = "label1";
             // 
             // lblTotalCalls
             // 
@@ -127,6 +162,15 @@
             this.lblTotalCalls.Size = new System.Drawing.Size(59, 13);
             this.lblTotalCalls.TabIndex = 1;
             this.lblTotalCalls.Text = "Total Calls:";
+            // 
+            // lblCallsPerHour
+            // 
+            this.lblCallsPerHour.AutoSize = true;
+            this.lblCallsPerHour.Location = new System.Drawing.Point(6, 118);
+            this.lblCallsPerHour.Name = "lblCallsPerHour";
+            this.lblCallsPerHour.Size = new System.Drawing.Size(66, 13);
+            this.lblCallsPerHour.TabIndex = 0;
+            this.lblCallsPerHour.Text = "Calls / Hour:";
             // 
             // lblAvgWaitValue
             // 
@@ -146,24 +190,6 @@
             this.lblAvgAgentDTValue.TabIndex = 5;
             this.lblAvgAgentDTValue.Text = "label1";
             // 
-            // lblTotalCallsValue
-            // 
-            this.lblTotalCallsValue.AutoSize = true;
-            this.lblTotalCallsValue.Location = new System.Drawing.Point(111, 87);
-            this.lblTotalCallsValue.Name = "lblTotalCallsValue";
-            this.lblTotalCallsValue.Size = new System.Drawing.Size(35, 13);
-            this.lblTotalCallsValue.TabIndex = 2;
-            this.lblTotalCallsValue.Text = "label1";
-            // 
-            // lblCallsPerHourValue
-            // 
-            this.lblCallsPerHourValue.AutoSize = true;
-            this.lblCallsPerHourValue.Location = new System.Drawing.Point(111, 118);
-            this.lblCallsPerHourValue.Name = "lblCallsPerHourValue";
-            this.lblCallsPerHourValue.Size = new System.Drawing.Size(35, 13);
-            this.lblCallsPerHourValue.TabIndex = 3;
-            this.lblCallsPerHourValue.Text = "label1";
-            // 
             // gbStats
             // 
             this.gbStats.Controls.Add(this.lblAvgAgentDTValue);
@@ -177,36 +203,11 @@
             this.gbStats.TabStop = false;
             this.gbStats.Text = "Stats";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "label2";
-            // 
-            // lbSkills
-            // 
-            this.lbSkills.FormattingEnabled = true;
-            this.lbSkills.Location = new System.Drawing.Point(9, 161);
-            this.lbSkills.Name = "lbSkills";
-            this.lbSkills.Size = new System.Drawing.Size(93, 160);
-            this.lbSkills.TabIndex = 6;
-            // 
             // ProccessQueueTimer
             // 
             this.ProccessQueueTimer.Enabled = true;
             this.ProccessQueueTimer.Interval = 10;
+            this.ProccessQueueTimer.Tick += new System.EventHandler(this.ProccessQueueTimer_Tick);
             // 
             // NUIronManForm
             // 

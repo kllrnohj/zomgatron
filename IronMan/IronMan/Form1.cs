@@ -21,6 +21,14 @@ namespace IronMan
 
         }
 
-
+        private void ProccessQueueTimer_Tick(object sender, EventArgs e)
+        {
+            if (Dispatcher.NeedsProcessing())
+            {
+                ProccessQueueTimer.Enabled = false;
+                Dispatcher.ProcessQueue();
+                ProccessQueueTimer.Enabled = true;
+            }
+        }
     }
 }
