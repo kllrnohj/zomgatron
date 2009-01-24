@@ -54,7 +54,6 @@
             this.lblTotalCallsValue = new System.Windows.Forms.Label();
             this.lblTotalCalls = new System.Windows.Forms.Label();
             this.lblCallsPerHour = new System.Windows.Forms.Label();
-            this.lbSkills = new System.Windows.Forms.ListBox();
             this.lblAvgWaitValue = new System.Windows.Forms.Label();
             this.lblAvgAgentDTValue = new System.Windows.Forms.Label();
             this.gbStats = new System.Windows.Forms.GroupBox();
@@ -79,7 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).BeginInit();
             this.gbStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableSkills)).BeginInit();
-            this.VisualizerPanel.SuspendLayout();
             this.gbVisualizerControls.SuspendLayout();
             this.gbVisualizer.SuspendLayout();
             this.SuspendLayout();
@@ -333,14 +331,6 @@
             this.lblCallsPerHour.TabIndex = 0;
             this.lblCallsPerHour.Text = "Calls / Hour:";
             // 
-            // lbSkills
-            // 
-            this.lbSkills.FormattingEnabled = true;
-            this.lbSkills.Location = new System.Drawing.Point(64, 93);
-            this.lbSkills.Name = "lbSkills";
-            this.lbSkills.Size = new System.Drawing.Size(206, 134);
-            this.lbSkills.TabIndex = 6;
-            // 
             // lblAvgWaitValue
             // 
             this.lblAvgWaitValue.AutoSize = true;
@@ -451,7 +441,6 @@
             // 
             // VisualizerPanel
             // 
-            this.VisualizerPanel.Controls.Add(this.lbSkills);
             this.VisualizerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VisualizerPanel.Location = new System.Drawing.Point(3, 16);
             this.VisualizerPanel.Name = "VisualizerPanel";
@@ -548,7 +537,6 @@
             this.gbStats.ResumeLayout(false);
             this.gbStats.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvailableSkills)).EndInit();
-            this.VisualizerPanel.ResumeLayout(false);
             this.gbVisualizerControls.ResumeLayout(false);
             this.gbVisualizerControls.PerformLayout();
             this.gbVisualizer.ResumeLayout(false);
@@ -570,7 +558,6 @@
         private System.Windows.Forms.Label lblAvgWaitValue;
         private System.Windows.Forms.Label lblCallsPerHourValue;
         private System.Windows.Forms.Label lblTotalCallsValue;
-        private System.Windows.Forms.ListBox lbSkills;
         private System.Windows.Forms.Label lblWorkTime;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.GroupBox gbStats;
