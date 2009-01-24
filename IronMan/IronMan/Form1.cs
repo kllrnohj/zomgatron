@@ -16,6 +16,11 @@ namespace IronMan
             InitializeComponent();
         }
 
+        private void lbCalls_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }
