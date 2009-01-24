@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AgentsAPI;
+using System.Reflection;
 
 namespace IronMan
 {
@@ -34,6 +35,7 @@ namespace IronMan
 
         public void PhoneCallReceived(PhoneCallEvent callDetails)
         {
+            int len = (int)callDetails.GetType().GetProperty("MaxCallLength", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(callDetails, null);
             string skills = "";
             foreach (var s in callDetails.SkillsNeeded)
                 skills += s + ",";
