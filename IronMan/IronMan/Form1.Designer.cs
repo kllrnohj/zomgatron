@@ -361,9 +361,9 @@
             // 
             // gbVisualizer
             // 
-            this.gbVisualizer.Location = new System.Drawing.Point(740, 167);
+            this.gbVisualizer.Location = new System.Drawing.Point(667, 167);
             this.gbVisualizer.Name = "gbVisualizer";
-            this.gbVisualizer.Size = new System.Drawing.Size(519, 370);
+            this.gbVisualizer.Size = new System.Drawing.Size(592, 370);
             this.gbVisualizer.TabIndex = 8;
             this.gbVisualizer.TabStop = false;
             this.gbVisualizer.Text = "Visualizer";
