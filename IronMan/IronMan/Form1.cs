@@ -77,16 +77,16 @@ namespace IronMan
                               where tc.AgentID == agent.AgentID
                               select tc).Count();
             long totalTime = 0;
-            try
-            {
-                totalTime = (from tc in meList
-                             where tc.AgentID == agent.AgentID
-                             select meList.Sum(n => tc.WaitTimeLength)).Single<long>();
-            }
-            catch (Exception) { }
+
+            totalTime = (from tc in meList
+                         where tc.AgentID == agent.AgentID
+                         select meList.Sum(n => tc.WaitTimeLength)).SingleOrDefault<long>();
 
             if (totalCalls > 0)
-                lblAvgCallTime.Text = FormatMSToTime(totalTime / totalCalls);
+                lblAvgAgentCallTimeValue.Text = FormatMSToTime(totalTime / totalCalls);
+            else
+                lblAvgAgentCallTimeValue.Text = "N/A";
+
             lblTotalCallsValue.Text = totalCalls.ToString();
             BindAgent(agent);
         }
