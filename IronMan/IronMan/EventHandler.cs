@@ -62,6 +62,12 @@ namespace IronMan
             
             if (Dispatcher.NeedsProcessing())
                 Dispatcher.ProcessQueue();
+
+            if (CallCenter.CallsCompleted == CallCenter.TotalCalls)
+            {
+                Log.LogString(String.Format("Calls: {0}, Score: {1}, Penalty: {2}", CallCenter.TotalCalls, CallCenter.TotalScore, CallCenter.TotalPenaltyTime));
+                System.Windows.Forms.MessageBox.Show("Done!");
+            }
         }
 
         #endregion
