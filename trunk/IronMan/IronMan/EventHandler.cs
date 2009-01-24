@@ -6,15 +6,26 @@ using AgentsAPI;
 
 namespace IronMan
 {
-    class EventHandler : IAgentStatusObserver, IPhoneCallObserver
+    class PhoneCallEventArguments : EventArgs
+    {
+        public PhoneCallEvent PhoneCallEvent { get; set; }
+    }
+
+    class AgentStatusChangedEventArguments : EventArgs
+    {
+        public Agent Agent { get; set; }
+    }
+
+    class AgentsAPIEventHandler : IAgentStatusObserver, IPhoneCallObserver
     {
         public CallCenter CallCenter { get; set; }
-        private Dictionary<int, Agent> agents;
+        public event EventHandler<PhoneCallEventArguments> OnPhoneCall;
+        public event EventHandler<AgentStatusChangedEventArguments> OnAgentStatusChanged;
 
-        public EventHandler(CallCenter callCenter)
+        public AgentsAPIEventHandler(CallCenter callCenter)
         {
             CallCenter = callCenter;
-            agents = new Dictionary<int, Agent>();
+            Dispatcher.CallCenter = callCenter;
             CallCenter.RegisterAgentStatusObserver(this);
             CallCenter.RegisterPhoneCallObserver(this);
         }
@@ -23,7 +34,11 @@ namespace IronMan
 
         public void PhoneCallReceived(PhoneCallEvent callDetails)
         {
-            
+            Dispatcher.AddPhoneCall(callDetails);
+            OnPhoneCall(this, new PhoneCallEventArguments() { PhoneCallEvent = callDetails });
+
+            if (Dispatcher.NeedsProcessing())
+                Dispatcher.ProcessQueue();
         }
 
         #endregion
@@ -32,10 +47,12 @@ namespace IronMan
 
         public void AgentStatusChanged(Agent agent)
         {
-            if (!agents.ContainsKey(agent.AgentID))
-                agents.Add(agent.AgentID, agent);
-            else
-                agents[agent.AgentID] = agent;
+            if (agent.AgentStatusType == AgentStatusType.Available)
+                Dispatcher.AddAvailableAgent(agent);
+            OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = agent });
+            
+            if (Dispatcher.NeedsProcessing())
+                Dispatcher.ProcessQueue();
         }
 
         #endregion
