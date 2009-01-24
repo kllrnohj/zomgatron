@@ -33,11 +33,19 @@
             this.lbAgents = new System.Windows.Forms.ListBox();
             this.lblAvgWait = new System.Windows.Forms.Label();
             this.gbCallInfo = new System.Windows.Forms.GroupBox();
+            this.lblWaitTimeValue = new System.Windows.Forms.Label();
+            this.lblCallDurationValue = new System.Windows.Forms.Label();
+            this.lblCallAgentIDValue = new System.Windows.Forms.Label();
+            this.lblCallStatusValue = new System.Windows.Forms.Label();
+            this.lblCallWaitTime = new System.Windows.Forms.Label();
             this.lblDuration = new System.Windows.Forms.Label();
             this.lblCallAgent = new System.Windows.Forms.Label();
             this.lblCallStatus = new System.Windows.Forms.Label();
             this.lblAvgAgentDT = new System.Windows.Forms.Label();
             this.gbAgentInfo = new System.Windows.Forms.GroupBox();
+            this.lblAgentIDValue = new System.Windows.Forms.Label();
+            this.lblWorkTimeValue = new System.Windows.Forms.Label();
+            this.lblAgentStatusValue = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lbSkills = new System.Windows.Forms.ListBox();
             this.lblWorkTime = new System.Windows.Forms.Label();
@@ -49,22 +57,16 @@
             this.lblAvgWaitValue = new System.Windows.Forms.Label();
             this.lblAvgAgentDTValue = new System.Windows.Forms.Label();
             this.gbStats = new System.Windows.Forms.GroupBox();
-            this.lblCallPerHour = new System.Windows.Forms.Label();
-            this.lblAvgCallTime = new System.Windows.Forms.Label();
-            this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblCallWaitTime = new System.Windows.Forms.Label();
+            this.lblAvgCallTimeValue = new System.Windows.Forms.Label();
+            this.lblAvgCallPerHourValue = new System.Windows.Forms.Label();
             this.dgvAvailableSkills = new System.Windows.Forms.DataGridView();
             this.Skill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.High = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Medium = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Low = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblCallPerHour = new System.Windows.Forms.Label();
+            this.lblAvgCallDuration = new System.Windows.Forms.Label();
+            this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.VisualizerPanel = new System.Windows.Forms.Panel();
             this.gbCallInfo.SuspendLayout();
             this.gbAgentInfo.SuspendLayout();
@@ -100,10 +102,10 @@
             // 
             // gbCallInfo
             // 
-            this.gbCallInfo.Controls.Add(this.label7);
-            this.gbCallInfo.Controls.Add(this.label6);
-            this.gbCallInfo.Controls.Add(this.label5);
-            this.gbCallInfo.Controls.Add(this.label4);
+            this.gbCallInfo.Controls.Add(this.lblWaitTimeValue);
+            this.gbCallInfo.Controls.Add(this.lblCallDurationValue);
+            this.gbCallInfo.Controls.Add(this.lblCallAgentIDValue);
+            this.gbCallInfo.Controls.Add(this.lblCallStatusValue);
             this.gbCallInfo.Controls.Add(this.lblCallWaitTime);
             this.gbCallInfo.Controls.Add(this.lblDuration);
             this.gbCallInfo.Controls.Add(this.lblCallAgent);
@@ -114,6 +116,51 @@
             this.gbCallInfo.TabIndex = 3;
             this.gbCallInfo.TabStop = false;
             this.gbCallInfo.Text = "Call Info";
+            // 
+            // lblWaitTimeValue
+            // 
+            this.lblWaitTimeValue.AutoSize = true;
+            this.lblWaitTimeValue.Location = new System.Drawing.Point(144, 98);
+            this.lblWaitTimeValue.Name = "lblWaitTimeValue";
+            this.lblWaitTimeValue.Size = new System.Drawing.Size(61, 13);
+            this.lblWaitTimeValue.TabIndex = 7;
+            this.lblWaitTimeValue.Text = "WAITTIME";
+            // 
+            // lblCallDurationValue
+            // 
+            this.lblCallDurationValue.AutoSize = true;
+            this.lblCallDurationValue.Location = new System.Drawing.Point(147, 75);
+            this.lblCallDurationValue.Name = "lblCallDurationValue";
+            this.lblCallDurationValue.Size = new System.Drawing.Size(90, 13);
+            this.lblCallDurationValue.TabIndex = 6;
+            this.lblCallDurationValue.Text = "CALLDURATION";
+            // 
+            // lblCallAgentIDValue
+            // 
+            this.lblCallAgentIDValue.AutoSize = true;
+            this.lblCallAgentIDValue.Location = new System.Drawing.Point(147, 50);
+            this.lblCallAgentIDValue.Name = "lblCallAgentIDValue";
+            this.lblCallAgentIDValue.Size = new System.Drawing.Size(55, 13);
+            this.lblCallAgentIDValue.TabIndex = 5;
+            this.lblCallAgentIDValue.Text = "AGENTID";
+            // 
+            // lblCallStatusValue
+            // 
+            this.lblCallStatusValue.AutoSize = true;
+            this.lblCallStatusValue.Location = new System.Drawing.Point(147, 29);
+            this.lblCallStatusValue.Name = "lblCallStatusValue";
+            this.lblCallStatusValue.Size = new System.Drawing.Size(76, 13);
+            this.lblCallStatusValue.TabIndex = 4;
+            this.lblCallStatusValue.Text = "CALLSTATUS";
+            // 
+            // lblCallWaitTime
+            // 
+            this.lblCallWaitTime.AutoSize = true;
+            this.lblCallWaitTime.Location = new System.Drawing.Point(6, 98);
+            this.lblCallWaitTime.Name = "lblCallWaitTime";
+            this.lblCallWaitTime.Size = new System.Drawing.Size(58, 13);
+            this.lblCallWaitTime.TabIndex = 3;
+            this.lblCallWaitTime.Text = "Wait Time:";
             // 
             // lblDuration
             // 
@@ -153,9 +200,9 @@
             // 
             // gbAgentInfo
             // 
-            this.gbAgentInfo.Controls.Add(this.label3);
-            this.gbAgentInfo.Controls.Add(this.label2);
-            this.gbAgentInfo.Controls.Add(this.label1);
+            this.gbAgentInfo.Controls.Add(this.lblAgentIDValue);
+            this.gbAgentInfo.Controls.Add(this.lblWorkTimeValue);
+            this.gbAgentInfo.Controls.Add(this.lblAgentStatusValue);
             this.gbAgentInfo.Controls.Add(this.lblStatus);
             this.gbAgentInfo.Controls.Add(this.lbSkills);
             this.gbAgentInfo.Controls.Add(this.lblWorkTime);
@@ -170,6 +217,33 @@
             this.gbAgentInfo.TabIndex = 4;
             this.gbAgentInfo.TabStop = false;
             this.gbAgentInfo.Text = "Agent Info";
+            // 
+            // lblAgentIDValue
+            // 
+            this.lblAgentIDValue.AutoSize = true;
+            this.lblAgentIDValue.Location = new System.Drawing.Point(76, 29);
+            this.lblAgentIDValue.Name = "lblAgentIDValue";
+            this.lblAgentIDValue.Size = new System.Drawing.Size(55, 13);
+            this.lblAgentIDValue.TabIndex = 10;
+            this.lblAgentIDValue.Text = "AGENTID";
+            // 
+            // lblWorkTimeValue
+            // 
+            this.lblWorkTimeValue.AutoSize = true;
+            this.lblWorkTimeValue.Location = new System.Drawing.Point(76, 57);
+            this.lblWorkTimeValue.Name = "lblWorkTimeValue";
+            this.lblWorkTimeValue.Size = new System.Drawing.Size(67, 13);
+            this.lblWorkTimeValue.TabIndex = 9;
+            this.lblWorkTimeValue.Text = "WORKTIME";
+            // 
+            // lblAgentStatusValue
+            // 
+            this.lblAgentStatusValue.AutoSize = true;
+            this.lblAgentStatusValue.Location = new System.Drawing.Point(76, 83);
+            this.lblAgentStatusValue.Name = "lblAgentStatusValue";
+            this.lblAgentStatusValue.Size = new System.Drawing.Size(90, 13);
+            this.lblAgentStatusValue.TabIndex = 8;
+            this.lblAgentStatusValue.Text = "AGENT STATUS";
             // 
             // lblStatus
             // 
@@ -209,20 +283,20 @@
             // lblCallsPerHourValue
             // 
             this.lblCallsPerHourValue.AutoSize = true;
-            this.lblCallsPerHourValue.Location = new System.Drawing.Point(111, 128);
+            this.lblCallsPerHourValue.Location = new System.Drawing.Point(78, 128);
             this.lblCallsPerHourValue.Name = "lblCallsPerHourValue";
-            this.lblCallsPerHourValue.Size = new System.Drawing.Size(35, 13);
+            this.lblCallsPerHourValue.Size = new System.Drawing.Size(83, 13);
             this.lblCallsPerHourValue.TabIndex = 3;
-            this.lblCallsPerHourValue.Text = "label1";
+            this.lblCallsPerHourValue.Text = "CALLS / HOUR";
             // 
             // lblTotalCallsValue
             // 
             this.lblTotalCallsValue.AutoSize = true;
-            this.lblTotalCallsValue.Location = new System.Drawing.Point(111, 105);
+            this.lblTotalCallsValue.Location = new System.Drawing.Point(76, 105);
             this.lblTotalCallsValue.Name = "lblTotalCallsValue";
-            this.lblTotalCallsValue.Size = new System.Drawing.Size(35, 13);
+            this.lblTotalCallsValue.Size = new System.Drawing.Size(75, 13);
             this.lblTotalCallsValue.TabIndex = 2;
-            this.lblTotalCallsValue.Text = "label1";
+            this.lblTotalCallsValue.Text = "TOTALCALLS";
             // 
             // lblTotalCalls
             // 
@@ -247,24 +321,26 @@
             this.lblAvgWaitValue.AutoSize = true;
             this.lblAvgWaitValue.Location = new System.Drawing.Point(144, 51);
             this.lblAvgWaitValue.Name = "lblAvgWaitValue";
-            this.lblAvgWaitValue.Size = new System.Drawing.Size(35, 13);
+            this.lblAvgWaitValue.Size = new System.Drawing.Size(57, 13);
             this.lblAvgWaitValue.TabIndex = 4;
-            this.lblAvgWaitValue.Text = "label1";
+            this.lblAvgWaitValue.Text = "AVGWAIT";
             // 
             // lblAvgAgentDTValue
             // 
             this.lblAvgAgentDTValue.AutoSize = true;
             this.lblAvgAgentDTValue.Location = new System.Drawing.Point(144, 73);
             this.lblAvgAgentDTValue.Name = "lblAvgAgentDTValue";
-            this.lblAvgAgentDTValue.Size = new System.Drawing.Size(35, 13);
+            this.lblAvgAgentDTValue.Size = new System.Drawing.Size(127, 13);
             this.lblAvgAgentDTValue.TabIndex = 5;
-            this.lblAvgAgentDTValue.Text = "label1";
+            this.lblAvgAgentDTValue.Text = "AVGAGENTDOWNTIME";
             // 
             // gbStats
             // 
+            this.gbStats.Controls.Add(this.lblAvgCallTimeValue);
+            this.gbStats.Controls.Add(this.lblAvgCallPerHourValue);
             this.gbStats.Controls.Add(this.dgvAvailableSkills);
             this.gbStats.Controls.Add(this.lblCallPerHour);
-            this.gbStats.Controls.Add(this.lblAvgCallTime);
+            this.gbStats.Controls.Add(this.lblAvgCallDuration);
             this.gbStats.Controls.Add(this.lblAvgAgentDTValue);
             this.gbStats.Controls.Add(this.lblAvgAgentDT);
             this.gbStats.Controls.Add(this.lblAvgWait);
@@ -276,38 +352,23 @@
             this.gbStats.TabStop = false;
             this.gbStats.Text = "Stats";
             // 
-            // lblCallPerHour
+            // lblAvgCallTimeValue
             // 
-            this.lblCallPerHour.AutoSize = true;
-            this.lblCallPerHour.Location = new System.Drawing.Point(9, 103);
-            this.lblCallPerHour.Name = "lblCallPerHour";
-            this.lblCallPerHour.Size = new System.Drawing.Size(104, 13);
-            this.lblCallPerHour.TabIndex = 7;
-            this.lblCallPerHour.Text = "Average Call / Hour:";
+            this.lblAvgCallTimeValue.AutoSize = true;
+            this.lblAvgCallTimeValue.Location = new System.Drawing.Point(144, 25);
+            this.lblAvgCallTimeValue.Name = "lblAvgCallTimeValue";
+            this.lblAvgCallTimeValue.Size = new System.Drawing.Size(81, 13);
+            this.lblAvgCallTimeValue.TabIndex = 10;
+            this.lblAvgCallTimeValue.Text = "AVGCALLTIME";
             // 
-            // lblAvgCallTime
+            // lblAvgCallPerHourValue
             // 
-            this.lblAvgCallTime.AutoSize = true;
-            this.lblAvgCallTime.Location = new System.Drawing.Point(6, 25);
-            this.lblAvgCallTime.Name = "lblAvgCallTime";
-            this.lblAvgCallTime.Size = new System.Drawing.Size(96, 13);
-            this.lblAvgCallTime.TabIndex = 6;
-            this.lblAvgCallTime.Text = "Average Call Time:";
-            // 
-            // ProccessQueueTimer
-            // 
-            this.ProccessQueueTimer.Enabled = true;
-            this.ProccessQueueTimer.Interval = 10;
-            this.ProccessQueueTimer.Tick += new System.EventHandler(this.ProccessQueueTimer_Tick);
-            // 
-            // lblCallWaitTime
-            // 
-            this.lblCallWaitTime.AutoSize = true;
-            this.lblCallWaitTime.Location = new System.Drawing.Point(6, 98);
-            this.lblCallWaitTime.Name = "lblCallWaitTime";
-            this.lblCallWaitTime.Size = new System.Drawing.Size(58, 13);
-            this.lblCallWaitTime.TabIndex = 3;
-            this.lblCallWaitTime.Text = "Wait Time:";
+            this.lblAvgCallPerHourValue.AutoSize = true;
+            this.lblAvgCallPerHourValue.Location = new System.Drawing.Point(144, 103);
+            this.lblAvgCallPerHourValue.Name = "lblAvgCallPerHourValue";
+            this.lblAvgCallPerHourValue.Size = new System.Drawing.Size(109, 13);
+            this.lblAvgCallPerHourValue.TabIndex = 9;
+            this.lblAvgCallPerHourValue.Text = "AVGCALLPERHOUR";
             // 
             // dgvAvailableSkills
             // 
@@ -317,9 +378,9 @@
             this.High,
             this.Medium,
             this.Low});
-            this.dgvAvailableSkills.Location = new System.Drawing.Point(6, 132);
+            this.dgvAvailableSkills.Location = new System.Drawing.Point(6, 163);
             this.dgvAvailableSkills.Name = "dgvAvailableSkills";
-            this.dgvAvailableSkills.Size = new System.Drawing.Size(443, 230);
+            this.dgvAvailableSkills.Size = new System.Drawing.Size(443, 243);
             this.dgvAvailableSkills.TabIndex = 8;
             // 
             // Skill
@@ -342,68 +403,29 @@
             this.Low.HeaderText = "Low";
             this.Low.Name = "Low";
             // 
-            // label1
+            // lblCallPerHour
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(114, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "label1";
+            this.lblCallPerHour.AutoSize = true;
+            this.lblCallPerHour.Location = new System.Drawing.Point(6, 103);
+            this.lblCallPerHour.Name = "lblCallPerHour";
+            this.lblCallPerHour.Size = new System.Drawing.Size(104, 13);
+            this.lblCallPerHour.TabIndex = 7;
+            this.lblCallPerHour.Text = "Average Call / Hour:";
             // 
-            // label2
+            // lblAvgCallDuration
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(111, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "label2";
+            this.lblAvgCallDuration.AutoSize = true;
+            this.lblAvgCallDuration.Location = new System.Drawing.Point(6, 25);
+            this.lblAvgCallDuration.Name = "lblAvgCallDuration";
+            this.lblAvgCallDuration.Size = new System.Drawing.Size(96, 13);
+            this.lblAvgCallDuration.TabIndex = 6;
+            this.lblAvgCallDuration.Text = "Average Call Time:";
             // 
-            // label3
+            // ProccessQueueTimer
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(111, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(147, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "label4";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(147, 49);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "label5";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(147, 75);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "label6";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(144, 98);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "label7";
+            this.ProccessQueueTimer.Enabled = true;
+            this.ProccessQueueTimer.Interval = 10;
+            this.ProccessQueueTimer.Tick += new System.EventHandler(this.ProccessQueueTimer_Tick);
             // 
             // VisualizerPanel
             // 
@@ -461,21 +483,23 @@
         private System.Windows.Forms.Label lblCallAgent;
         private System.Windows.Forms.Label lblCallStatus;
         private System.Windows.Forms.Label lblCallPerHour;
-        private System.Windows.Forms.Label lblAvgCallTime;
+        private System.Windows.Forms.Label lblAvgCallDuration;
         private System.Windows.Forms.Label lblCallWaitTime;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAgentIDValue;
+        private System.Windows.Forms.Label lblWorkTimeValue;
+        private System.Windows.Forms.Label lblAgentStatusValue;
         private System.Windows.Forms.DataGridView dgvAvailableSkills;
         private System.Windows.Forms.DataGridViewTextBoxColumn Skill;
         private System.Windows.Forms.DataGridViewTextBoxColumn High;
         private System.Windows.Forms.DataGridViewTextBoxColumn Medium;
         private System.Windows.Forms.DataGridViewTextBoxColumn Low;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblWaitTimeValue;
+        private System.Windows.Forms.Label lblCallDurationValue;
+        private System.Windows.Forms.Label lblCallAgentIDValue;
+        private System.Windows.Forms.Label lblCallStatusValue;
         private System.Windows.Forms.Panel VisualizerPanel;
+        private System.Windows.Forms.Label lblAvgCallTimeValue;
+        private System.Windows.Forms.Label lblAvgCallPerHourValue;
     }
 }
 
