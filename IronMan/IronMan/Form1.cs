@@ -23,6 +23,15 @@ namespace IronMan
 
         private void ProccessQueueTimer_Tick(object sender, EventArgs e)
         {
+            if (!ProccessQueueTimer.Enabled)
+                return;
+            if (CallCenter.CallsCompleted == (CallCenter.TotalCalls - 1))
+            {
+                ProccessQueueTimer.Enabled = false;
+                string message = String.Format("Completed: {0} calls in {1} ms with {2} penalty", CallCenter.TotalCalls, CallCenter.TotalScore, CallCenter.TotalPenaltyTime);
+                Log.LogString(message);
+                MessageBox.Show(message);
+            }
             if (Dispatcher.NeedsProcessing())
             {
                 ProccessQueueTimer.Enabled = false;
