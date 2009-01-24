@@ -123,6 +123,7 @@ namespace IronMan
 
         private void lbAgents_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbAgents.SelectedItem == null) return;
             Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
             List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
 
