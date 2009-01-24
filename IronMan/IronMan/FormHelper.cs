@@ -39,6 +39,7 @@ namespace IronMan
             lblCallIDValue.Text = call.PhoneCallID.ToString();
             lblCallAgentIDValue.Text = call.AgentID.ToString();
             lblCallDurationValue.Text = call.PhoneCallLength.ToString();
+            lblWaitTimeValue.Text = call.WaitTimeLength.ToString();
 
            
         }
