@@ -42,10 +42,11 @@ namespace IronMan
             Log.LogString(String.Format("Receiving Call: {0}, {1}, {2}", callDetails.PhoneCallID, callDetails.IsTransfered, skills));
             if (!callDetails.IsTransfered)
                 Dispatcher.AddPhoneCall(callDetails);
-            OnPhoneCall(this, new PhoneCallEventArguments() { PhoneCallEvent = callDetails });
 
             if (Dispatcher.NeedsProcessing())
                 Dispatcher.ProcessQueue();
+
+            OnPhoneCall(this, new PhoneCallEventArguments() { PhoneCallEvent = callDetails });
         }
 
         #endregion
@@ -60,10 +61,11 @@ namespace IronMan
             Log.LogString(String.Format("Agent Status Changed: {0}, {1}, {2}", agent.AgentID, agent.AgentStatusType, skills));
             if (agent.AgentStatusType == AgentStatusType.Available)
                 Dispatcher.AddAvailableAgent(agent);
-            OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = agent });
             
             if (Dispatcher.NeedsProcessing())
                 Dispatcher.ProcessQueue();
+
+            OnAgentStatusChanged(this, new AgentStatusChangedEventArguments() { Agent = agent });
         }
 
         #endregion
