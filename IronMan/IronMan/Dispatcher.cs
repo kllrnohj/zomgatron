@@ -10,6 +10,7 @@ namespace IronMan
     {
         static private List<PhoneCallEvent> calls = new List<PhoneCallEvent>();
         static private List<Agent> availableAgents = new List<Agent>();
+        static public CallCenter CallCenter { get; set; }
 
         static public bool NeedsProcessing()
         {
@@ -26,7 +27,7 @@ namespace IronMan
             availableAgents.Add(available);
         }
 
-        static public void ProcessQueue(CallCenter c)
+        static public void ProcessQueue()
         {
             int bestCallVal = 0;
             int bestCallIndex = -1;
@@ -45,12 +46,12 @@ namespace IronMan
 
             if (bestCallsAgent != null)
             {
-                c.TransferCall(calls[bestCallIndex].PhoneCallID, bestCallsAgent.AgentID);
+                CallCenter.TransferCall(calls[bestCallIndex].PhoneCallID, bestCallsAgent.AgentID);
                 calls.RemoveAt(bestCallIndex);
                 availableAgents.Remove(bestCallsAgent);
 
                 if (NeedsProcessing())
-                    ProcessQueue(c);
+                    ProcessQueue();
             }
         }
 
