@@ -60,6 +60,8 @@
             this.lblAvgCallDuration = new System.Windows.Forms.Label();
             this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.gbVisualizer = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.gbCallInfo.SuspendLayout();
             this.gbAgentInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).BeginInit();
@@ -69,18 +71,18 @@
             // lbCalls
             // 
             this.lbCalls.FormattingEnabled = true;
-            this.lbCalls.Location = new System.Drawing.Point(3, 13);
+            this.lbCalls.Location = new System.Drawing.Point(12, 26);
             this.lbCalls.Name = "lbCalls";
-            this.lbCalls.Size = new System.Drawing.Size(176, 524);
+            this.lbCalls.Size = new System.Drawing.Size(167, 511);
             this.lbCalls.TabIndex = 0;
             this.lbCalls.SelectedIndexChanged += new System.EventHandler(this.lbCalls_SelectedIndexChanged);
             // 
             // lbAgents
             // 
             this.lbAgents.FormattingEnabled = true;
-            this.lbAgents.Location = new System.Drawing.Point(195, 13);
+            this.lbAgents.Location = new System.Drawing.Point(195, 26);
             this.lbAgents.Name = "lbAgents";
-            this.lbAgents.Size = new System.Drawing.Size(183, 524);
+            this.lbAgents.Size = new System.Drawing.Size(183, 511);
             this.lbAgents.TabIndex = 1;
             this.lbAgents.SelectedIndexChanged += new System.EventHandler(this.lbAgents_SelectedIndexChanged);
             // 
@@ -368,11 +370,31 @@
             this.gbVisualizer.TabStop = false;
             this.gbVisualizer.Text = "Visualizer";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Phone Call ID";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(192, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Agent ID";
+            // 
             // NUIronManForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1271, 545);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.gbVisualizer);
             this.Controls.Add(this.gbStats);
             this.Controls.Add(this.gbAgentInfo);
@@ -390,6 +412,7 @@
             this.gbStats.ResumeLayout(false);
             this.gbStats.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -426,6 +449,8 @@
         private System.Windows.Forms.ListBox lbRequiredSkills;
         private System.Windows.Forms.Label lblAvgAgentCallTimeValue;
         private System.Windows.Forms.Label lblAvgCallTime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
