@@ -8,7 +8,16 @@ namespace IronMan
 {
     class EventHandler : IAgentStatusObserver, IPhoneCallObserver
     {
+        public CallCenter CallCenter { get; set; }
+        private Dictionary<int, Agent> agents;
 
+        public EventHandler(CallCenter callCenter)
+        {
+            CallCenter = callCenter;
+            agents = new Dictionary<int, Agent>();
+            CallCenter.RegisterAgentStatusObserver(this);
+            CallCenter.RegisterPhoneCallObserver(this);
+        }
 
         #region IPhoneCallObserver Members
 
