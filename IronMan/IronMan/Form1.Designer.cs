@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lbCalls = new System.Windows.Forms.ListBox();
             this.lbAgents = new System.Windows.Forms.ListBox();
             this.lblAvgWait = new System.Windows.Forms.Label();
@@ -60,29 +63,40 @@
             this.lblAvgCallDuration = new System.Windows.Forms.Label();
             this.ProccessQueueTimer = new System.Windows.Forms.Timer(this.components);
             this.gbVisualizer = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.gpGraphSettings = new System.Windows.Forms.GroupBox();
+            this.checkBEnable3D = new System.Windows.Forms.CheckBox();
+            this.cbData = new System.Windows.Forms.ComboBox();
+            this.lblData = new System.Windows.Forms.Label();
+            this.checkBMarkers = new System.Windows.Forms.CheckBox();
+            this.cbLighting = new System.Windows.Forms.ComboBox();
+            this.lblLighting = new System.Windows.Forms.Label();
+            this.lblPhoneID = new System.Windows.Forms.Label();
+            this.lblAgentID = new System.Windows.Forms.Label();
             this.gbCallInfo.SuspendLayout();
             this.gbAgentInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).BeginInit();
             this.gbStats.SuspendLayout();
+            this.gbVisualizer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.gpGraphSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbCalls
             // 
             this.lbCalls.FormattingEnabled = true;
-            this.lbCalls.Location = new System.Drawing.Point(12, 26);
+            this.lbCalls.Location = new System.Drawing.Point(3, 39);
             this.lbCalls.Name = "lbCalls";
-            this.lbCalls.Size = new System.Drawing.Size(167, 511);
+            this.lbCalls.Size = new System.Drawing.Size(176, 498);
             this.lbCalls.TabIndex = 0;
             this.lbCalls.SelectedIndexChanged += new System.EventHandler(this.lbCalls_SelectedIndexChanged);
             // 
             // lbAgents
             // 
             this.lbAgents.FormattingEnabled = true;
-            this.lbAgents.Location = new System.Drawing.Point(195, 26);
+            this.lbAgents.Location = new System.Drawing.Point(195, 39);
             this.lbAgents.Name = "lbAgents";
-            this.lbAgents.Size = new System.Drawing.Size(183, 511);
+            this.lbAgents.Size = new System.Drawing.Size(183, 498);
             this.lbAgents.TabIndex = 1;
             this.lbAgents.SelectedIndexChanged += new System.EventHandler(this.lbAgents_SelectedIndexChanged);
             // 
@@ -357,12 +371,12 @@
             // 
             // ProccessQueueTimer
             // 
-            this.ProccessQueueTimer.Enabled = true;
             this.ProccessQueueTimer.Interval = 10;
             this.ProccessQueueTimer.Tick += new System.EventHandler(this.ProccessQueueTimer_Tick);
             // 
             // gbVisualizer
             // 
+            this.gbVisualizer.Controls.Add(this.chart1);
             this.gbVisualizer.Location = new System.Drawing.Point(667, 167);
             this.gbVisualizer.Name = "gbVisualizer";
             this.gbVisualizer.Size = new System.Drawing.Size(592, 370);
@@ -370,31 +384,126 @@
             this.gbVisualizer.TabStop = false;
             this.gbVisualizer.Text = "Visualizer";
             // 
-            // label1
+            // chart1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Phone Call ID";
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
+            this.chart1.Location = new System.Drawing.Point(3, 16);
+            this.chart1.Name = "chart1";
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
+            this.chart1.Size = new System.Drawing.Size(586, 351);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "DataVisualiztion";
             // 
-            // label2
+            // gpGraphSettings
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(192, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Agent ID";
+            this.gpGraphSettings.Controls.Add(this.checkBEnable3D);
+            this.gpGraphSettings.Controls.Add(this.cbData);
+            this.gpGraphSettings.Controls.Add(this.lblData);
+            this.gpGraphSettings.Controls.Add(this.checkBMarkers);
+            this.gpGraphSettings.Controls.Add(this.cbLighting);
+            this.gpGraphSettings.Controls.Add(this.lblLighting);
+            this.gpGraphSettings.Location = new System.Drawing.Point(393, 304);
+            this.gpGraphSettings.Name = "gpGraphSettings";
+            this.gpGraphSettings.Size = new System.Drawing.Size(268, 229);
+            this.gpGraphSettings.TabIndex = 9;
+            this.gpGraphSettings.TabStop = false;
+            this.gpGraphSettings.Text = "Graph Settings";
+            // 
+            // checkBEnable3D
+            // 
+            this.checkBEnable3D.AutoSize = true;
+            this.checkBEnable3D.Checked = true;
+            this.checkBEnable3D.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBEnable3D.Location = new System.Drawing.Point(10, 115);
+            this.checkBEnable3D.Name = "checkBEnable3D";
+            this.checkBEnable3D.Size = new System.Drawing.Size(76, 17);
+            this.checkBEnable3D.TabIndex = 7;
+            this.checkBEnable3D.Text = "Enable 3D";
+            this.checkBEnable3D.UseVisualStyleBackColor = true;
+            this.checkBEnable3D.CheckedChanged += new System.EventHandler(this.checkBEnable3D_CheckedChanged);
+            // 
+            // cbData
+            // 
+            this.cbData.FormattingEnabled = true;
+            this.cbData.Location = new System.Drawing.Point(9, 86);
+            this.cbData.Name = "cbData";
+            this.cbData.Size = new System.Drawing.Size(121, 21);
+            this.cbData.TabIndex = 6;
+            this.cbData.SelectedIndexChanged += new System.EventHandler(this.cbData_SelectedIndexChanged);
+            // 
+            // lblData
+            // 
+            this.lblData.AutoSize = true;
+            this.lblData.Location = new System.Drawing.Point(9, 69);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(30, 13);
+            this.lblData.TabIndex = 5;
+            this.lblData.Text = "Data";
+            // 
+            // checkBMarkers
+            // 
+            this.checkBMarkers.AutoSize = true;
+            this.checkBMarkers.Checked = true;
+            this.checkBMarkers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBMarkers.Location = new System.Drawing.Point(10, 138);
+            this.checkBMarkers.Name = "checkBMarkers";
+            this.checkBMarkers.Size = new System.Drawing.Size(94, 17);
+            this.checkBMarkers.TabIndex = 4;
+            this.checkBMarkers.Text = "Show Markers";
+            this.checkBMarkers.UseVisualStyleBackColor = true;
+            this.checkBMarkers.CheckedChanged += new System.EventHandler(this.checkBMarkers_CheckedChanged);
+            // 
+            // cbLighting
+            // 
+            this.cbLighting.FormattingEnabled = true;
+            this.cbLighting.Location = new System.Drawing.Point(12, 36);
+            this.cbLighting.Name = "cbLighting";
+            this.cbLighting.Size = new System.Drawing.Size(121, 21);
+            this.cbLighting.TabIndex = 1;
+            this.cbLighting.SelectedIndexChanged += new System.EventHandler(this.cbLighting_SelectedIndexChanged);
+            // 
+            // lblLighting
+            // 
+            this.lblLighting.AutoSize = true;
+            this.lblLighting.Location = new System.Drawing.Point(9, 20);
+            this.lblLighting.Name = "lblLighting";
+            this.lblLighting.Size = new System.Drawing.Size(44, 13);
+            this.lblLighting.TabIndex = 0;
+            this.lblLighting.Text = "Lighting";
+            // 
+            // lblPhoneID
+            // 
+            this.lblPhoneID.AutoSize = true;
+            this.lblPhoneID.Location = new System.Drawing.Point(0, 23);
+            this.lblPhoneID.Name = "lblPhoneID";
+            this.lblPhoneID.Size = new System.Drawing.Size(38, 13);
+            this.lblPhoneID.TabIndex = 10;
+            this.lblPhoneID.Text = "Call ID";
+            // 
+            // lblAgentID
+            // 
+            this.lblAgentID.AutoSize = true;
+            this.lblAgentID.Location = new System.Drawing.Point(192, 23);
+            this.lblAgentID.Name = "lblAgentID";
+            this.lblAgentID.Size = new System.Drawing.Size(49, 13);
+            this.lblAgentID.TabIndex = 11;
+            this.lblAgentID.Text = "Agent ID";
             // 
             // NUIronManForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1271, 545);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblAgentID);
+            this.Controls.Add(this.lblPhoneID);
+            this.Controls.Add(this.gpGraphSettings);
             this.Controls.Add(this.gbVisualizer);
             this.Controls.Add(this.gbStats);
             this.Controls.Add(this.gbAgentInfo);
@@ -411,6 +520,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgentSkills)).EndInit();
             this.gbStats.ResumeLayout(false);
             this.gbStats.PerformLayout();
+            this.gbVisualizer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.gpGraphSettings.ResumeLayout(false);
+            this.gpGraphSettings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,8 +562,16 @@
         private System.Windows.Forms.ListBox lbRequiredSkills;
         private System.Windows.Forms.Label lblAvgAgentCallTimeValue;
         private System.Windows.Forms.Label lblAvgCallTime;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.GroupBox gpGraphSettings;
+        private System.Windows.Forms.ComboBox cbLighting;
+        private System.Windows.Forms.Label lblLighting;
+        private System.Windows.Forms.CheckBox checkBMarkers;
+        private System.Windows.Forms.ComboBox cbData;
+        private System.Windows.Forms.Label lblData;
+        private System.Windows.Forms.CheckBox checkBEnable3D;
+        private System.Windows.Forms.Label lblPhoneID;
+        private System.Windows.Forms.Label lblAgentID;
     }
 }
 

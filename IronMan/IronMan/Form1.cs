@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using AgentsAPI;
 namespace IronMan
 {
@@ -14,6 +15,8 @@ namespace IronMan
         private AgentsAPIEventHandler AgentsEventHandler { get; set; }
         private AgentsAPI.CallCenter CallCenter { get; set; }
 
+        Series series1 = new Series();
+        ChartArea chartArea1 = new ChartArea();
         public NUIronManForm()
         {
             InitializeComponent();
@@ -42,12 +45,37 @@ namespace IronMan
 
         private void NUIronManForm_Load(object sender, EventArgs e)
         {
+            //similuation setup
             CallCenter = new AgentsAPI.CallCenter();
             AgentsEventHandler = new AgentsAPIEventHandler(CallCenter);
+            //setup the form
+            cbLighting.DataSource = Enum.GetValues(typeof(LightStyle));
+            cbData.DataSource = Enum.GetValues(typeof(GraphData));
             AgentsEventHandler.OnAgentStatusChanged += new EventHandler<AgentStatusChangedEventArguments>(AgentsEventHandler_OnAgentStatusChanged);
             AgentsEventHandler.OnPhoneCall += new EventHandler<PhoneCallEventArguments>(AgentsEventHandler_OnPhoneCall);
 
+            //configure the chart setting
+            chart1.Legends["Legend1"].HeaderSeparator = LegendSeparatorStyle.Line;
+            chart1.Legends["Legend1"].HeaderSeparatorColor = Color.Gray;
+            chartArea1.Area3DStyle.Enable3D = checkBEnable3D.Checked;
+            chartArea1.Area3DStyle.IsRightAngleAxes = false;
+            chartArea1.Area3DStyle.Inclination = 40;
+            chartArea1.Area3DStyle.Rotation = 15;
+            chartArea1.Area3DStyle.LightStyle = LightStyle.None;
+            chartArea1.Area3DStyle.Perspective = 0;
+
+            series1.ChartType = SeriesChartType.SplineArea;
+            series1["LineTension"] = "0.1";
+            series1["ShowMarkerLines"] = checkBMarkers.Checked.ToString();
+
+            //add everything to the chart
+            chart1.ChartAreas.Add(chartArea1);
+            chart1.Series.Add(series1);
+            
+
+            //simulationstart
             CallCenter.StartSimulator();
+            ProccessQueueTimer.Enabled = true;
         }
 
         void AgentsEventHandler_OnPhoneCall(object sender, PhoneCallEventArguments e)
@@ -56,9 +84,7 @@ namespace IronMan
                 lbCalls.Items.Add(e.PhoneCallEvent);
             lbCalls.DisplayMember = "PhoneCallID";
 
-            //if (lbAgents.SelectedItem == null) return;
-            //update the stats
-            //Agent agent = (lbAgents.SelectedItem as AgentContainer).Agent;
+
             long totalTime = 0, totalWait = 0;
 
             List<PhoneCallEvent> meList = new List<PhoneCallEvent>();
@@ -85,6 +111,8 @@ namespace IronMan
             }
             else
                 lblAvgCallTimeValue.Text = "N/A";
+
+            UpdateData(cbData.SelectedItem.ToString());
 
         }
 
@@ -133,7 +161,25 @@ namespace IronMan
             BindCall(call);
         }
 
+        private void cbData_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateData(cbData.SelectedValue.ToString());
+        }
 
+        private void checkBEnable3D_CheckedChanged(object sender, EventArgs e)
+        {
+            chartArea1.Area3DStyle.Enable3D = checkBEnable3D.Checked;
+        }
+
+        private void checkBMarkers_CheckedChanged(object sender, EventArgs e)
+        {
+            series1["ShowMarkerLines"] = checkBMarkers.Checked.ToString();
+        }
+
+        private void cbLighting_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chartArea1.Area3DStyle.LightStyle = (LightStyle)LightStyle.Parse(typeof(LightStyle), cbLighting.Text);
+        }
 
 
 
