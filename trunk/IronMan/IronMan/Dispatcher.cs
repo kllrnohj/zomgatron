@@ -70,7 +70,7 @@ namespace IronMan
         }
         static public int HRateAgent(int callIndex, int agentIndex)
         {
-            int awesomeness = (availableAgents[agentIndex].AgentStatusType == AgentStatusType.Unavailable || availableAgents[agentIndex].AgentStatusType == AgentStatusType.OnCall) ? 0 : 1;
+            int awesomeness = 1;
 
             foreach (SkillType s in calls[callIndex].SkillsNeeded)
             {
